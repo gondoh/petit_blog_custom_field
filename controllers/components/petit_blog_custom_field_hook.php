@@ -101,6 +101,9 @@ class PetitBlogCustomFieldHookComponent extends Object {
 		
 		// プレビューの際は編集欄の内容を送る
 		if($controller->name == 'Blog') {
+			// 設定値を送る
+			$controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
+			
 			if($controller->preview) {
 				if(!empty($controller->data['PetitBlogCustomField'])) {
 					$controller->viewVars['post']['PetitBlogCustomField'] = $controller->data['PetitBlogCustomField'];
@@ -109,6 +112,9 @@ class PetitBlogCustomFieldHookComponent extends Object {
 		}
 		
 		if($controller->name == 'BlogPosts') {
+			
+			// 設定値を送る
+			$controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
 			
 			// ブログ記事編集・追加画面で実行
 			// - startup で処理したかったが $controller->data に入れるとそれを全て上書きしてしまうのでダメだった
