@@ -108,9 +108,9 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
 			
 			$count = 0;
 			if($this->blogContentDatas) {
-				foreach ($this->blogContentDatas as $blog) {
+				foreach ($this->blogContentDatas as $key => $blog) {
 					
-					$configData = $this->PetitBlogCustomFieldConfig->findByBlogContentId($blog['BlogContent']['id']);
+					$configData = $this->PetitBlogCustomFieldConfig->findByBlogContentId($key);
 					if(!$configData) {
 						$this->data['PetitBlogCustomFieldConfig']['blog_content_id'] = $blog['BlogContent']['id'];
 						$this->data['PetitBlogCustomFieldConfig']['use_petit'] = true;
