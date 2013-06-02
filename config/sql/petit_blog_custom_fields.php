@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* PetitBlogCustomFields schema generated on: 2013-06-01 23:06:10 : 1370095450*/
+/* PetitBlogCustomFields schema generated on: 2013-06-03 04:06:38 : 1370199818*/
 class PetitBlogCustomFieldsSchema extends CakeSchema {
 	var $name = 'PetitBlogCustomFields';
 
@@ -26,6 +26,7 @@ class PetitBlogCustomFieldsSchema extends CakeSchema {
 		'radio' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 2),
 		'select' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 2),
 		'date' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'status' => array('type' => 'boolean', 'null' => false, 'default' => '1'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))

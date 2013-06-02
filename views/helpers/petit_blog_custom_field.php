@@ -25,8 +25,10 @@ class PetitBlogCustomFieldHelper extends AppHelper {
  */
 	function getPbcfName($post, $options = array()) {
 		
-		if(!empty($post['PetitBlogCustomField']['name'])) {
-			return $post['PetitBlogCustomField']['name'];
+		if($this->judgeStatus($post)) {
+			if(!empty($post['PetitBlogCustomField']['name'])) {
+				return $post['PetitBlogCustomField']['name'];
+			}
 		}
 		
 		return;
@@ -42,14 +44,97 @@ class PetitBlogCustomFieldHelper extends AppHelper {
  */
 	function getPbcfName2($post, $options = array()) {
 		
-		return $post['PetitBlogCustomField']['name_2'];
+		if($this->judgeStatus($post)) {
+			return $post['PetitBlogCustomField']['name_2'];
+		}
 		
 	}
 /**
- * 指定されたバナーエリア名を元にバナーを表示する
+ * 「テキストエリア」を取得する
  *
- * @param string $bannerAreaName
- * @param type $options
+ * @param array $post
+ * @param array $options
+ * @return string
+ * @access public
+ */
+	function getPbcfContent($post, $options = array()) {
+		
+		if($this->judgeStatus($post)) {
+			return $post['PetitBlogCustomField']['content'];
+		}
+		
+	}
+
+/**
+ * 「ラジオ」を取得する
+ *
+ * @param array $post
+ * @param array $options
+ * @return string
+ * @access public
+ */
+	function getPbcfRadio($post, $options = array()) {
+		
+		if($this->judgeStatus($post)) {
+			$config = Configure::read('petitBlogCustomField.radio');
+			return $config[$post['PetitBlogCustomField']['radio']];
+		}
+		
+	}
+/**
+ * 「セレクト」を取得する
+ *
+ * @param array $post
+ * @param array $options
+ * @return string
+ * @access public
+ */
+	function getPbcfSelect($post, $options = array()) {
+		
+		if($this->judgeStatus($post)) {
+			$config = Configure::read('petitBlogCustomField.select');
+			return $config[$post['PetitBlogCustomField']['select']];
+		}
+		
+	}
+/**
+ * 「日付」を取得する
+ *
+ * @param array $post
+ * @param array $options
+ * @return string
+ * @access public
+ */
+	function getPbcfDate($post, $options = array()) {
+		
+		if($this->judgeStatus($post)) {
+			return $post['PetitBlogCustomField']['date'];
+		}
+		
+	}
+/**
+ * カスタムフィールドの有効を判定する
+ * 
+ * @param array $post
+ * @return boolean
+ * @access public
+ */	
+	function judgeStatus($post = array()) {
+		
+		if(!empty($post['PetitBlogCustomField']['status'])) {
+			if($post['PetitBlogCustomField']['status']) {
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+/**
+ * プチ・カスタムフィールド一覧を表示する
+ *
+ * @param array $post
+ * @param array $options
  * @return void
  * @access public
  */

@@ -117,13 +117,13 @@ class PetitBlogCustomFieldHookHelper extends AppHelper {
 		
 		if($name == 'blog_tag') {
 			if($this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig']['use_petit']) {
-				
-				$post = $this->View->viewVars['post'];
-				// TODO ヘルパが自動初期化されないので明示的に初期化
-				$this->bcBaser = new BcBaserHelper();
-				$petitBlogCustomParts = $this->bcBaser->getElement('petit_blog_custom_field_block', array('plugin' => 'petit_blog_custom_field', 'post' => $post));
-				$out = $petitBlogCustomParts . $out;
-				
+				if($this->View->viewVars['post']['PetitBlogCustomField']['status']) {
+					$post = $this->View->viewVars['post'];
+					// TODO ヘルパが自動初期化されないので明示的に初期化
+					$this->bcBaser = new BcBaserHelper();
+					$petitBlogCustomParts = $this->bcBaser->getElement('petit_blog_custom_field_block', array('plugin' => 'petit_blog_custom_field', 'post' => $post));
+					$out = $petitBlogCustomParts . $out;
+				}				
 			}
 		}
 		

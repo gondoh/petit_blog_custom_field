@@ -32,9 +32,14 @@
 						'blog_post_no', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
 				<th><?php echo $paginator->sort(array(
-						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' プチ・テキスト',
-						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' プチ・テキスト'),
+						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' テキスト',
+						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' テキスト'),
 						'name', array('escape' => false, 'class' => 'btn-direction')) ?>
+				</th>
+				<th><?php echo $paginator->sort(array(
+						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 利用',
+						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 利用'),
+						'status', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
 				<th><?php echo $paginator->sort(array(
 						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 登録日',
@@ -77,6 +82,9 @@
 		<td>
 			<?php echo $data['PetitBlogCustomField']['name'] ?>
 		</td>
+		<td>
+			<?php echo $bcText->booleanDo($data['PetitBlogCustomField']['status'], '利用') ?>
+		</td>
 		<td style="white-space: nowrap">
 			<?php echo $bcTime->format('Y-m-d', $data['PetitBlogCustomField']['created']) ?>
 			<br />
@@ -86,7 +94,7 @@
 	<?php endforeach; ?>
 <?php else: ?>
 	<tr>
-		<td colspan="8"><p class="no-data">データがありません。</p></td>
+		<td colspan="7"><p class="no-data">データがありません。</p></td>
 	</tr>
 <?php endif; ?>
 	</tbody>

@@ -64,6 +64,19 @@ $(window).load(function() {
 <?php endif ?>
 	<tr>
 		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomField.status', 'この記事での利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomField.status', array(
+					'type'		=> 'radio',
+					'options'	=> $customFieldConfig['status'],
+					'legend'	=> false,
+					'separator'	=> '&nbsp;&nbsp;')) ?>
+			<?php echo $bcForm->error('PetitBlogCustomField.status') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.name', 'テキスト') ?>
 		</th>
 		<td class="col-input">
@@ -89,7 +102,6 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.content') ?>
 		</td>
 	</tr>
-
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.radio', 'ラジオ') ?>
