@@ -135,7 +135,8 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 				foreach ($datas as $data) {
 					
 					$this->data['PetitBlogCustomField']['blog_post_id'] = $data['BlogPost']['id'];
-					$this->data['PetitBlogCustomField']['blog_post_no'] = $data['BlogPost']['no'];					
+					$this->data['PetitBlogCustomField']['blog_post_no'] = $data['BlogPost']['no'];
+					$this->data['PetitBlogCustomField']['radio'] = 0;
 					$this->data['PetitBlogCustomField']['select'] = 0;
 					
 					$this->PetitBlogCustomField->create($this->data);
