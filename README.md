@@ -11,6 +11,13 @@ petit_blog_custom_field プラグインは、ブログ記事に入力欄を追�
 
 ## Uses ##
 
+利用前に設定値を設定します。
+ラジオボタンとセレクトボックスの設定値のサンプルを
+BASERCMS/app/plugins/petit_blog_custom_field/config/pbcf_config.php.default に記述してます。
+この内容を
+BASERCMS/app/plugins/petit_blog_custom_field/config/pbcf_config.php にコピーして、
+利用する内容に書き換えて下さい。
+
 
 ## Uses Config ##
 

@@ -36,3 +36,33 @@ $config['BcApp.adminNavi.petit_blog_custom_field'] = array(
 			)
 	)
 );
+/**
+ * プチ・カスタムフィールドデフォルト設定
+ */
+/**
+ * ラジオ設定
+ * 
+ */
+$config['petitBlogCustomField.status'] = array(
+	0 => '利用しない',
+	1 => '利用する'
+);
+/**
+ * ラジオ設定
+ * 
+ */
+$config['petitBlogCustomField.radio'] = array(
+	0 => '指定無し',
+	1 => 'ラジオ1',
+	2 => 'ラジオ2'
+);
+/**
+ * セレクト設定
+ * 
+ */
+$config['petitBlogCustomField.select'] = array(
+	0 => '指定無し',
+	1 => 'セレクト1',
+	2 => 'セレクト2',
+	3 => 'セレクト3'
+);
