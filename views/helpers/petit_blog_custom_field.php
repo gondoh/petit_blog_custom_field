@@ -75,8 +75,19 @@ class PetitBlogCustomFieldHelper extends AppHelper {
  */
 	function getPbcfRadio($post, $options = array()) {
 		
+		$_options = array(
+			'invisible' => false
+		);
+		$options = array_merge($_options, $options);
+		extract($options);
+		
 		if($this->judgeStatus($post)) {
 			$config = Configure::read('petitBlogCustomField.radio');
+			if(!$post['PetitBlogCustomField']['radio']) {
+				if($invisible) {
+					return '';
+				}
+			}
 			return $config[$post['PetitBlogCustomField']['radio']];
 		}
 		
@@ -91,8 +102,19 @@ class PetitBlogCustomFieldHelper extends AppHelper {
  */
 	function getPbcfSelect($post, $options = array()) {
 		
+		$_options = array(
+			'invisible' => false
+		);
+		$options = array_merge($_options, $options);
+		extract($options);
+		
 		if($this->judgeStatus($post)) {
 			$config = Configure::read('petitBlogCustomField.select');
+			if(!$post['PetitBlogCustomField']['select']) {
+				if($invisible) {
+					return '';
+				}
+			}
 			return $config[$post['PetitBlogCustomField']['select']];
 		}
 		
