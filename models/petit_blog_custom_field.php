@@ -44,7 +44,13 @@ class PetitBlogCustomField extends BaserPluginAppModel {
 		'name' => array(
 			'maxLength' => array(
 				'rule'		=> array('maxLength', 255),
-				'message'	=> 'プチ・テキストは255文字以内で入力してください。'
+				'message'	=> 'テキストは255文字以内で入力してください。'
+			)
+		),
+		'name_2' => array(
+			'maxLength' => array(
+				'rule'		=> array('maxLength', 255),
+				'message'	=> 'テキスト2は255文字以内で入力してください。'
 			)
 		)
 	);
