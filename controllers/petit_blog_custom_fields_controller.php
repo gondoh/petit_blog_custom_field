@@ -212,6 +212,9 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		if(isset($data['PetitBlogCustomField']['blog_content_id'])) {
 			$blogContentId = $data['PetitBlogCustomField']['blog_content_id'];
 		}
+		if(isset($data['PetitBlogCustomField']['status']) && $data['PetitBlogCustomField']['status'] === '') {
+			unset($data['PetitBlogCustomField']['status']);
+		}
 		
 		unset($data['_Token']);
 		unset($data['PetitBlogCustomField']['name']);
@@ -227,10 +230,19 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		if($data['PetitBlogCustomField']) {
 			$conditions = $this->postConditions($data);
 		}
-		
+		/*
 		if($name) {
 			$conditions[] = array(
 				'PetitBlogCustomField.name LIKE' => '%'.$name.'%'
+			);
+		}*/
+		// １つの入力指定から複数フィールド検索指定
+		if($name) {
+			$conditions['or'][] = array(
+				'PetitBlogCustomField.name LIKE' => '%'.$name.'%'
+			);
+			$conditions['or'][] = array(
+				'PetitBlogCustomField.name_2 LIKE' => '%'.$name.'%'
 			);
 		}
 		if($blogContentId) {
