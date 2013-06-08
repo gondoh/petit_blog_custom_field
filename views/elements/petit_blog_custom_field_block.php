@@ -17,7 +17,7 @@
 			<dd><?php echo $petitBlogCustomField->getPbcfName($post) ?></dd>
 			<dd><?php echo $petitBlogCustomField->getPbcfName2($post) ?></dd>
 			<dd><?php echo $petitBlogCustomField->getPbcfContent($post) ?></dd>
-			<dd><?php echo $petitBlogCustomField->getPbcfRadio($post) ?></dd>
+			<dd><?php echo $petitBlogCustomField->getPbcfRadio($post, array('invisible' => true)) ?></dd>
 			<dd><?php echo $petitBlogCustomField->getPbcfSelect($post) ?></dd>
 			<dd><?php echo $petitBlogCustomField->getPbcfDate($post) ?></dd>
 		</dl>

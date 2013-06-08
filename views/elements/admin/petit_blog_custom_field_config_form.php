@@ -7,8 +7,10 @@
  * @author			arata
  * @license			MIT
  */
+$style = '';
 ?>
 <?php if($this->params['controller'] == 'blog_contents'): ?>
+<?php $style = ' style="display: none;"' ?>
 <script type="text/javascript">
 $(function () {
 	$("#textPetitBlogCustomFieldConfigTable").toggle(
@@ -33,10 +35,6 @@ $(function () {
 	<?php echo $bcForm->input('PetitBlogCustomFieldConfig.id', array('type' => 'hidden')) ?>
 <?php endif ?>
 
-<?php $style = '' ?>
-<?php if($this->params['controller'] == 'blog_contents'): ?>
-	<?php $style = ' style="display: none;"' ?>
-<?php endif ?>
 <div id="PetitBlogCustomFieldConfigTable"<?php echo $style ?>>
 
 <table cellpadding="0" cellspacing="0" class="form-table section">

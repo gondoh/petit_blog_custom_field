@@ -7,10 +7,17 @@
  * @author			arata
  * @license			MIT
  */
+$style = '';
 ?>
 <?php if($this->params['controller'] == 'blog_posts'): ?>
+<?php $style = ' style="display: none;"' ?>
 <script type="text/javascript">
 $(function () {
+	var PetitBlogCustomFieldStatusValue = $('input[name="data[PetitBlogCustomField][status]"]:checked').val();
+	if(PetitBlogCustomFieldStatusValue == 1) {
+		$('#PetitBlogCustomFieldTable').slideDown('slow');
+	}
+
 	$("#textPetitBlogCustomFieldTable").toggle(
 		function() {
 			$('#PetitBlogCustomFieldTable').slideDown('slow');
@@ -39,10 +46,6 @@ $(window).load(function() {
 	<?php echo $bcForm->input('PetitBlogCustomField.id', array('type' => 'hidden')) ?>
 <?php endif ?>
 
-<?php $style = '' ?>
-<?php if($this->params['controller'] == 'blog_posts'): ?>
-	<?php $style = ' style="display: none;"' ?>
-<?php endif ?>
 <div id="PetitBlogCustomFieldTable"<?php echo $style ?>>
 
 <table cellpadding="0" cellspacing="0" class="form-table section">
@@ -98,7 +101,13 @@ $(window).load(function() {
 			<?php echo $bcForm->label('PetitBlogCustomField.content', 'テキストエリア') ?>
 		</th>
 		<td class="col-input">
-			<?php echo $bcForm->input('PetitBlogCustomField.content', array('type' => 'textarea', 'cols' => 40, 'rows' => 4)) ?>
+			<?php echo $bcForm->ckeditor('PetitBlogCustomField.content', null, array(
+				'width'		=> 'auto', 
+				'height'	=> '200px', 
+				'type'		=> 'simple',
+				'enterBr'	=> @$siteConfig['editor_enter_br']
+			)) ?>
+			<?php // echo $bcForm->input('PetitBlogCustomField.content', array('type' => 'textarea', 'cols' => 40, 'rows' => 4)) ?>
 			<?php echo $bcForm->error('PetitBlogCustomField.content') ?>
 		</td>
 	</tr>

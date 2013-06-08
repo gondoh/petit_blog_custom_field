@@ -11,11 +11,15 @@
 <?php echo $bcForm->create('PetitBlogCustomField', array('url' => array('action' => 'index'))) ?>
 <p>
 	<span>
-		<?php echo $bcForm->label('PetitBlogCustomField.name', 'プチ・カスタムネーム') ?>
+		<?php echo $bcForm->label('PetitBlogCustomField.name', 'カスタムネーム') ?>
 		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.name', array('type' => 'text', 'size' => '30')) ?></span>
 	<span>
 		<?php echo $bcForm->label('PetitBlogCustomField.blog_content_id', 'ブログ') ?>
 		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.blog_content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
+	</span>
+	<span>
+		<?php echo $bcForm->label('PetitBlogCustomField.status', '利用状態') ?>
+		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.status', array('type' => 'select', 'options' => $bcText->booleanMarkList(), 'empty' => '指定なし')) ?>
 	</span>
 </p>
 <div class="button">
