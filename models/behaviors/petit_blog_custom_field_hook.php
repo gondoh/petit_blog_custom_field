@@ -15,7 +15,7 @@ class PetitBlogCustomFieldHookBehavior extends ModelBehavior {
  * @access public
  */
 	var $registerHooks = array(
-			'BlogPost'	=> array('afterDelete', 'beforeFind'),
+			'BlogPost'	=> array('afterDelete', 'beforeFind', 'beforeValidate'),
 			'BlogContent'	=> array('afterDelete')
 	);
 /**
@@ -78,6 +78,26 @@ class PetitBlogCustomFieldHookBehavior extends ModelBehavior {
 		}
 		
 		return $query;
+		
+	}
+/**
+ * beforeValidate
+ * 
+ * @param Model $model
+ * @return boolean
+ * @access public
+ */
+	function beforeValidate($model) {
+		
+		if($model->alias == 'BlogPost') {
+			// ブログ記事保存の手前で PetitBlogCustomField モデルのデータに対して validation を行う
+			$PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
+			$PetitBlogCustomFieldModel->set($model->data);
+			return $PetitBlogCustomFieldModel->validates();
+			
+		}
+		
+		return true;
 		
 	}
 	
