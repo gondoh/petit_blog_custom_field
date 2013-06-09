@@ -78,9 +78,33 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
  */
 	function admin_edit($id = null) {
 		
-		$this->pageTitle = $this->adminTitle . '編集';
+		if(!$id) {
+			$this->setMessage('無効な処理です。', true);
+			$this->redirect(array('action' => 'index'));			
+		}
 		
-		parent::admin_edit($id);
+		if(empty($this->data)) {
+			$this->{$this->modelClass}->id = $id;
+			$this->data = $this->{$this->modelClass}->read();
+			$configData = $this->PetitBlogCustomFieldConfig->find('first', array(
+				'conditions' => array(
+					'PetitBlogCustomFieldConfig.blog_content_id' => $this->data[$this->modelClass]['blog_content_id']
+				)));
+			$this->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
+		} else {
+			$this->{$this->modelClass}->set($this->data);
+			if ($this->{$this->modelClass}->save($this->data)) {
+				$this->setMessage('更新が完了しました。');
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->setMessage('入力エラーです。内容を修正して下さい。', true);
+			}
+		}
+		
+		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);
+		
+		$this->pageTitle = $this->adminTitle . '編集';
+		$this->render('form');
 		
 	}
 /**

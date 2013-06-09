@@ -48,17 +48,71 @@ $(function () {
 <?php endif ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_petit', 'プチ・カスタムフィールドの利用') ?>
-			<?php echo $html->image('admin/icn_help.png', array('id' => 'helpUsePetit', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
-			<div id="helptextUsePetit" class="helptext">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.status', 'プチ・カスタムフィールドの利用') ?>
+			<?php echo $bcBaser->img('admin/icn_help.png', array('id' => 'helpPetitBlogCustomFieldConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+			<div id="helptextPetitBlogCustomFieldConfigStatus" class="helptext">
 				<ul>
 					<li>ブログ記事でのプチ・カスタムフィールドの利用の有無を指定します。</li>
 				</ul>
 			</div>
 		</th>
 		<td class="col-input">
-			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_petit', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
-			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_petit') ?>
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.status', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.status') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_name', 'テキストの利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_name', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_name') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_name_2', 'テキスト2の利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_name_2', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_name_2') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_content', 'テキストエリアの利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_content', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_content') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_radio', 'ラジオボタンの利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_radio', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_radio') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_select', 'セレクトボックスの利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_select', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_select') ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.use_date', '日付の利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $bcForm->input('PetitBlogCustomFieldConfig.use_date', array('type' => 'radio', 'options' => $bcText->booleanDoList('利用'))) ?>
+			<?php echo $bcForm->error('PetitBlogCustomFieldConfig.use_date') ?>
 		</td>
 	</tr>
 </table>

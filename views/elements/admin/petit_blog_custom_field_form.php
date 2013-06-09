@@ -78,6 +78,7 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.status') ?>
 		</td>
 	</tr>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_name']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.name', 'テキスト') ?>
@@ -87,6 +88,8 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.name') ?>
 		</td>
 	</tr>
+<?php endif ?>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_name_2']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.name_2', 'テキスト2') ?>
@@ -96,6 +99,8 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.name_2') ?>
 		</td>
 	</tr>
+<?php endif ?>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_content']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.content', 'テキストエリア') ?>
@@ -111,6 +116,8 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.content') ?>
 		</td>
 	</tr>
+<?php endif ?>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_radio']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.radio', 'ラジオ') ?>
@@ -120,6 +127,8 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.radio') ?>
 		</td>
 	</tr>
+<?php endif ?>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_select']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.select', 'セレクト') ?>
@@ -129,6 +138,8 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.select') ?>
 		</td>
 	</tr>
+<?php endif ?>
+<?php if($this->data['PetitBlogCustomFieldConfig']['use_date']): ?>
 	<tr>
 		<th class="col-head">
 			<?php echo $bcForm->label('PetitBlogCustomField.date', '日付') ?>
@@ -138,5 +149,6 @@ $(window).load(function() {
 			<?php echo $bcForm->error('PetitBlogCustomField.date') ?>
 		</td>
 	</tr>
+<?php endif ?>
 </table>
 </div>

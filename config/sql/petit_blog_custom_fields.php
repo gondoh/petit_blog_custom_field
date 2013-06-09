@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* PetitBlogCustomFields schema generated on: 2013-06-03 04:06:38 : 1370199818*/
+/* PetitBlogCustomFields schema generated on: 2013-06-09 21:06:02 : 1370781542*/
 class PetitBlogCustomFieldsSchema extends CakeSchema {
 	var $name = 'PetitBlogCustomFields';
 
