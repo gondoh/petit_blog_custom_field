@@ -32,7 +32,7 @@ class PetitBlogCustomFieldConfig extends BaserPluginAppModel {
 		
 		$data = array(
 			'PetitBlogCustomFieldConfig' => array(
-				'use_petit' => true
+				'status' => true
 			)
 		);
 		return $data;

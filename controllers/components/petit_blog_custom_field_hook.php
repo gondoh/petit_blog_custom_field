@@ -170,10 +170,10 @@ class PetitBlogCustomFieldHookComponent extends Object {
 					$saveData = array();
 					if($configData) {
 						$saveData['PetitBlogCustomFieldConfig']['blog_content_id'] = $controller->viewVars['data']['BlogContent']['id'];
-						$saveData['PetitBlogCustomFieldConfig']['use_petit'] = $configData['PetitBlogCustomFieldConfig']['use_petit'];
+						$saveData['PetitBlogCustomFieldConfig']['status'] = $configData['PetitBlogCustomFieldConfig']['status'];
 					} else {
 						$saveData['PetitBlogCustomFieldConfig']['blog_content_id'] = $controller->viewVars['data']['BlogContent']['id'];
-						$saveData['PetitBlogCustomFieldConfig']['use_petit'] = true;
+						$saveData['PetitBlogCustomFieldConfig']['status'] = true;
 					}
 					
 					$this->PetitBlogCustomFieldConfigModel->create($saveData);

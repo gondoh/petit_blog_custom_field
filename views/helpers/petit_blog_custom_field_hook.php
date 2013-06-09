@@ -71,7 +71,7 @@ class PetitBlogCustomFieldHookHelper extends AppHelper {
 	function afterFormCreate($form, $id, $out) {
 		
 		if($form->params['controller'] == 'blog_posts'){
-			if($form->data['PetitBlogCustomFieldConfig']['use_petit']) {
+			if($form->data['PetitBlogCustomFieldConfig']['status']) {
 				// ブログ記事追加画面にプチ・カスタムフィールド編集欄を追加する
 				if($this->action == 'admin_add'){
 					if($id == 'BlogPostForm') {
@@ -116,7 +116,7 @@ class PetitBlogCustomFieldHookHelper extends AppHelper {
 	function afterElement($name, $out) {
 		
 		if($name == 'blog_tag') {
-			if($this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig']['use_petit']) {
+			if($this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig']['status']) {
 				if($this->View->viewVars['post']['PetitBlogCustomField']['status']) {
 					$post = $this->View->viewVars['post'];
 					// TODO ヘルパが自動初期化されないので明示的に初期化
