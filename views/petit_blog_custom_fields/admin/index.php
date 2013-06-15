@@ -32,8 +32,8 @@
 						'blog_post_no', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
 				<th><?php echo $paginator->sort(array(
-						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' テキスト',
-						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' テキスト'),
+						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' '. $customFieldConfig['field_name']['text'],
+						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' '. $customFieldConfig['field_name']['text']),
 						'name', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
 				<th><?php echo $paginator->sort(array(

@@ -81,7 +81,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_name']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.name', 'テキスト') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.name', $customFieldConfig['field_name']['name']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->input('PetitBlogCustomField.name', array('type' => 'text', 'size' => 40, 'maxlength' => 255, 'counter' => true)) ?>
@@ -92,7 +92,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_name_2']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.name_2', 'テキスト2') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.name_2', $customFieldConfig['field_name']['name_2']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->input('PetitBlogCustomField.name_2', array('type' => 'text', 'size' => 40, 'maxlength' => 255, 'counter' => true)) ?>
@@ -103,7 +103,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_content']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.content', 'テキストエリア') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.content', $customFieldConfig['field_name']['textarea']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->ckeditor('PetitBlogCustomField.content', null, array(
@@ -120,7 +120,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_radio']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.radio', 'ラジオ') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.radio', $customFieldConfig['field_name']['radio']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->input('PetitBlogCustomField.radio', array('type' => 'radio', 'options' => $customFieldConfig['radio'])) ?>
@@ -131,7 +131,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_select']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.select', 'セレクト') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.select', $customFieldConfig['field_name']['select']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->input('PetitBlogCustomField.select', array('type' => 'select', 'options' => $customFieldConfig['select'])) ?>
@@ -142,7 +142,7 @@ $(window).load(function() {
 <?php if($this->data['PetitBlogCustomFieldConfig']['use_date']): ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomField.date', '日付') ?>
+			<?php echo $bcForm->label('PetitBlogCustomField.date', $customFieldConfig['field_name']['date']) ?>
 		</th>
 		<td class="col-input">
 			<?php echo $bcForm->dateTimePicker('PetitBlogCustomField.date', array('size' => 12, 'maxlength' => 10), true) ?>

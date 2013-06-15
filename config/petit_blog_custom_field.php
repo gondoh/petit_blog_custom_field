@@ -37,7 +37,20 @@ $config['BcApp.adminNavi.petit_blog_custom_field'] = array(
 	)
 );
 /**
+ * フィールド名設定
+ * 
+ */
+$config['petitBlogCustomField.field_name'] = array(
+	'name'		=> 'テキストtext',
+	'name_2'	=> 'テキスト2',
+	'textarea'	=> 'テキストエリアhoge',
+	'radio'		=> 'ラジオ',
+	'select'	=> 'セレクト',
+	'date'		=> '日付'
+);
+/**
  * プチ・カスタムフィールドデフォルト設定
+ * 
  */
 /**
  * ラジオ設定

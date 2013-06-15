@@ -148,6 +148,8 @@ class PetitBlogCustomFieldHookComponent extends Object {
 		}
 		
 		if($controller->name == 'BlogContents') {
+			// 設定値を送る
+			$controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
 			
 			// ブログ設定編集画面に設定情報を送る
 			if($controller->action == 'admin_edit') {
