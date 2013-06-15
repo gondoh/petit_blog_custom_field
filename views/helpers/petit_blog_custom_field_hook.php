@@ -48,14 +48,19 @@ class PetitBlogCustomFieldHookHelper extends AppHelper {
 		parent::beforeRender();
 		
 		// ブログページ表示の際に実行
-		if(!empty($this->params['plugin'])) {
-			if($this->params['plugin'] == 'blog') {
-				if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
-					$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-				}else {
-					$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+		if(empty($this->params['admin'])) {
+			if(!empty($this->params['plugin'])) {
+				if($this->params['plugin'] == 'blog') {
+					if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
+						$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+					}else {
+						$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+					}
+					// 404に遷移した場合などで undifined が出るため判定する
+					if(!empty($this->View->viewVars['blogContent']['BlogContent']['id'])) {
+						$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $this->View->viewVars['blogContent']['BlogContent']['id']);
+					}
 				}
-				$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $this->View->viewVars['blogContent']['BlogContent']['id']);
 			}
 		}
 		
