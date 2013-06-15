@@ -92,6 +92,12 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 				)));
 			$this->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
 		} else {
+			$configData = $this->PetitBlogCustomFieldConfig->find('first', array(
+				'conditions' => array(
+					'PetitBlogCustomFieldConfig.blog_content_id' => $this->data[$this->modelClass]['blog_content_id']
+				)));
+			$this->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
+
 			$this->{$this->modelClass}->set($this->data);
 			if ($this->{$this->modelClass}->save($this->data)) {
 				$this->setMessage('更新が完了しました。');
