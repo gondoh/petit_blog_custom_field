@@ -98,9 +98,9 @@ class PetitBlogCustomFieldAppController extends BaserPluginAppController {
 			'fields'		=> array(),
 			'limit'			=> $this->passedArgs['num']
 		);
-		$datas = $this->paginate();
+		$datas = $this->paginate($this->modelClass);
 		if($datas) {
-			$this->set('datas',$datas);
+			$this->set('datas', $datas);
 		}
 		
 		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);

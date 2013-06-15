@@ -8,11 +8,11 @@
  * @license			MIT
  */
 ?>
-<?php echo $bcForm->create('PetitBlogCustomFieldConfigs', array('url' => array('action' => 'index'))) ?>
+<?php echo $bcForm->create('PetitBlogCustomFieldConfig', array('url' => array('action' => 'index'))) ?>
 <p>
 	<span>
-		<?php echo $bcForm->label('PetitBlogCustomFieldConfigs.blog_content_id', 'ブログ') ?>
-		&nbsp;<?php echo $bcForm->input('PetitBlogCustomFieldConfigs.blog_content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
+		<?php echo $bcForm->label('PetitBlogCustomFieldConfig.blog_content_id', 'ブログ') ?>
+		&nbsp;<?php echo $bcForm->input('PetitBlogCustomFieldConfig.blog_content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
 	</span>
 </p>
 <div class="button">
