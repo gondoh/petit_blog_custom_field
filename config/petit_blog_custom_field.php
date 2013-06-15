@@ -41,9 +41,9 @@ $config['BcApp.adminNavi.petit_blog_custom_field'] = array(
  * 
  */
 $config['petitBlogCustomField.field_name'] = array(
-	'name'		=> 'テキストtext',
+	'name'		=> 'テキスト',
 	'name_2'	=> 'テキスト2',
-	'textarea'	=> 'テキストエリアhoge',
+	'textarea'	=> 'テキストエリア',
 	'radio'		=> 'ラジオ',
 	'select'	=> 'セレクト',
 	'date'		=> '日付'
