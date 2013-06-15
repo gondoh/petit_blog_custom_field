@@ -48,7 +48,7 @@ $(function () {
 <?php endif ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.status', 'プチ・カスタムフィールドの利用') ?>
+			<?php echo $bcForm->label('PetitBlogCustomFieldConfig.status', 'カスタムフィールドの利用') ?>
 			<?php echo $bcBaser->img('admin/icn_help.png', array('id' => 'helpPetitBlogCustomFieldConfigStatus', 'class' => 'btn help', 'alt' => 'ヘルプ')) ?>
 			<div id="helptextPetitBlogCustomFieldConfigStatus" class="helptext">
 				<ul>
