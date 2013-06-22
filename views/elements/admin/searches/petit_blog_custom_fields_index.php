@@ -12,7 +12,9 @@
 <p>
 	<span>
 		<?php echo $bcForm->label('PetitBlogCustomField.name', 'カスタムネーム') ?>
-		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.name', array('type' => 'text', 'size' => '30')) ?></span>
+		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.name', array('type' => 'text', 'size' => '30')) ?>
+	</span>
+	<br />
 	<span>
 		<?php echo $bcForm->label('PetitBlogCustomField.blog_content_id', 'ブログ') ?>
 		&nbsp;<?php echo $bcForm->input('PetitBlogCustomField.blog_content_id', array('type' => 'select', 'options' => $blogContentDatas)) ?>
