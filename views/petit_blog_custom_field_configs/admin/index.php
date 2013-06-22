@@ -26,10 +26,16 @@
 						'blog_content_id', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
 				<th><?php echo $paginator->sort(array(
-						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' プチ・カスタムフィールドの利用',
-						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' プチ・カスタムフィールドの利用'),
+						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' カスタムフィールドの利用',
+						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' カスタムフィールドの利用'),
 						'status', array('escape' => false, 'class' => 'btn-direction')) ?>
 				</th>
+				<th>name</th>
+				<th>name_2</th>
+				<th>content</th>
+				<th>radio</th>
+				<th>select</th>
+				<th>date</th>
 				<th><?php echo $paginator->sort(array(
 						'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 登録日',
 						'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 登録日'),
@@ -57,6 +63,12 @@
 		<td>
 			<?php echo $bcText->booleanDo($data['PetitBlogCustomFieldConfig']['status'], '利用') ?>
 		</td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_name']) ?></td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_name_2']) ?></td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_content']) ?></td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_radio']) ?></td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_select']) ?></td>
+		<td><?php echo $bcText->booleanMark($data['PetitBlogCustomFieldConfig']['use_date']) ?></td>
 		<td style="white-space: nowrap">
 			<?php echo $bcTime->format('Y-m-d', $data['PetitBlogCustomFieldConfig']['created']) ?>
 			<br />
