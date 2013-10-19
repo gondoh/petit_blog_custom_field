@@ -76,7 +76,7 @@ class PetitBlogCustomFieldHookHelper extends AppHelper {
 	function afterFormCreate($form, $id, $out) {
 		
 		if($form->params['controller'] == 'blog_posts'){
-			if($form->data['PetitBlogCustomFieldConfig']['status']) {
+			if(!empty($form->data['PetitBlogCustomFieldConfig']['status'])) {
 				// ブログ記事追加画面にプチ・カスタムフィールド編集欄を追加する
 				if($this->action == 'admin_add'){
 					if($id == 'BlogPostForm') {
