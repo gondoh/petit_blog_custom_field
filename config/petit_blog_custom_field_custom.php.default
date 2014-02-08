@@ -8,6 +8,27 @@
  * @license			MIT
  */
 /**
+ * フィールド名設定
+ * 
+ */
+$config['petitBlogCustomField.field_name'] = array(
+	'name'		=> 'テキスト',
+	'name_2'	=> 'テキスト2',
+	'textarea'	=> 'テキストエリア',
+	'radio'		=> 'ラジオ',
+	'select'	=> 'セレクト',
+	'date'		=> '日付'
+);
+
+/**
+ * ラジオ設定
+ * 
+ */
+$config['petitBlogCustomField.status'] = array(
+	0 => '利用しない',
+	1 => '利用する'
+);
+/**
  * ラジオ設定
  * 
  */

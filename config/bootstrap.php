@@ -8,4 +8,4 @@
  * @license			MIT
  */
 loadPluginConfig('petit_blog_custom_field.petit_blog_custom_field');
-loadPluginConfig('petit_blog_custom_field.pbcf_config');
+loadPluginConfig('petit_blog_custom_field.petit_blog_custom_field_custom');
