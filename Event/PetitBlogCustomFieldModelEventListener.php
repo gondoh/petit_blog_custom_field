@@ -1,13 +1,13 @@
 <?php
 /**
- * [HookBehavior] petit_blog_custom_field
+ * [ModelEventListener] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
-class PetitBlogCustomFieldHookBehavior extends ModelBehavior {
+class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 /**
  * 登録フック
  *

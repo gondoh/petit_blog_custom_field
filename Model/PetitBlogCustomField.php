@@ -1,13 +1,13 @@
 <?php
 /**
- * PetitBlogCustomFieldモデル
+ * [Model] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
-class PetitBlogCustomField extends BaserPluginAppModel {
+class PetitBlogCustomField extends BcPluginAppModel {
 /**
  * モデル名
  * 

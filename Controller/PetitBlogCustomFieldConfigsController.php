@@ -1,10 +1,10 @@
 <?php
 /**
- * [Controller] petit_blog_custom_field
+ * [Controller] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
 /**

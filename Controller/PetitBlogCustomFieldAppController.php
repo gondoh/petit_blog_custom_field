@@ -1,13 +1,13 @@
 <?php
 /**
- * petit_blog_custom_field 基底コントローラ
+ * [Controller] PetitBlogCustomField 基底コントローラ
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
-class PetitBlogCustomFieldAppController extends BaserPluginAppController {
+class PetitBlogCustomFieldAppController extends BcPluginAppController {
 /**
  * ヘルパー
  *

@@ -1,11 +1,11 @@
 <?php
 /**
- * [ADMIN] petit_blog_custom_field
+ * [Config] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
-loadPluginConfig('petit_blog_custom_field.petit_blog_custom_field');
-loadPluginConfig('petit_blog_custom_field.petit_blog_custom_field_custom');
+loadPluginConfig('PetitBlogCustomField.petit_blog_custom_field');
+loadPluginConfig('PetitBlogCustomField.petit_blog_custom_field_custom');
