@@ -7,7 +7,7 @@
  * @package			PetitBlogCustomField
  * @license			MIT
  */
-class PetitBlogCustomFieldViewEventLister extends BcViewEventListener {
+class PetitBlogCustomFieldViewEventListener extends BcViewEventListener {
 /**
  * 登録フック
  *
