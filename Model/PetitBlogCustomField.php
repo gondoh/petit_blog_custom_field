@@ -12,35 +12,34 @@ class PetitBlogCustomField extends BcPluginAppModel {
  * モデル名
  * 
  * @var string
- * @access public
  */
-	var $name = 'PetitBlogCustomField';
+	public $name = 'PetitBlogCustomField';
+	
 /**
  * プラグイン名
  * 
  * @var string
- * @access public
  */
-	var $plugin = 'PetitBlogCustomField';
+	public $plugin = 'PetitBlogCustomField';
+	
 /**
  * belongsTo
  * 
  * @var array
- * @access @public
  */
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'BlogPost' => array(
 			'className'	=> 'Blog.BlogPost',
 			'foreignKey' => 'blog_post_id'
 			)
 		);
+	
 /**
  * バリデーション
  *
  * @var array
- * @access public
  */
-	var $validate = array(
+	public $validate = array(
 		'name' => array(
 			'maxLength' => array(
 				'rule'		=> array('maxLength', 255),
@@ -54,14 +53,13 @@ class PetitBlogCustomField extends BcPluginAppModel {
 			)
 		)
 	);
+	
 /**
  * 初期値を取得する
  *
  * @return array
- * @access public
  */
-	function getDefaultValue() {
-		
+	public function getDefaultValue() {
 		$data = array(
 			'PetitBlogCustomField' => array(
 				'radio' => 0,
@@ -69,7 +67,6 @@ class PetitBlogCustomField extends BcPluginAppModel {
 			)
 		);
 		return $data;
-		
 	}
 	
 }

@@ -12,31 +12,28 @@ class PetitBlogCustomFieldConfig extends BcPluginAppModel {
  * モデル名
  * 
  * @var string
- * @access public
  */
-	var $name = 'PetitBlogCustomFieldConfig';
+	public $name = 'PetitBlogCustomFieldConfig';
+	
 /**
  * プラグイン名
  * 
  * @var string
- * @access public
  */
-	var $plugin = 'PetitBlogCustomField';
+	public $plugin = 'PetitBlogCustomField';
+	
 /**
  * 初期値を取得する
  *
  * @return array
- * @access public
  */
-	function getDefaultValue() {
-		
+	public function getDefaultValue() {
 		$data = array(
 			'PetitBlogCustomFieldConfig' => array(
 				'status' => true
 			)
 		);
 		return $data;
-		
 	}
 	
 }
