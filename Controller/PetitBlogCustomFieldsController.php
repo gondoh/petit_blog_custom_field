@@ -16,68 +16,62 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
  * コントローラー名
  * 
  * @var string
- * @access public
  */
-	var $name = 'PetitBlogCustomFields';
+	public $name = 'PetitBlogCustomFields';
+	
 /**
  * モデル
  * 
  * @var array
- * @access public
  */
-	var $uses = array('PetitBlogCustomField.PetitBlogCustomField', 'PetitBlogCustomField.PetitBlogCustomFieldConfig');
+	public $uses = array('PetitBlogCustomField.PetitBlogCustomField', 'PetitBlogCustomField.PetitBlogCustomFieldConfig');
+	
 /**
  * ぱんくずナビ
  *
  * @var string
- * @access public
  */
-	var $crumbs = array(
+	public $crumbs = array(
 		array('name' => 'プラグイン管理', 'url' => array('plugin' => '', 'controller' => 'plugins', 'action' => 'index')),
 		array('name' => 'プチ・カスタムフィールド管理', 'url' => array('plugin' => 'petit_blog_custom_field', 'controller' => 'petit_blog_custom_fields', 'action' => 'index'))
 	);
+	
 /**
  * 管理画面タイトル
  *
  * @var string
- * @access public
  */
-	var $adminTitle = 'プチ・ブログカスタムフィールド';
+	public $adminTitle = 'プチ・ブログカスタムフィールド';
+	
 /**
  * beforeFilter
  *
  * @return	void
- * @access 	public
  */
-	function beforeFilter() {
-		
+	public function beforeFilter() {
 		parent::beforeFilter();
-		
 	}
+	
 /**
  * [ADMIN] 一覧
  * 
  * @return void
- * @access public
  */
-	function admin_index() {
-		
+	public function admin_index() {
 		$this->pageTitle = $this->adminTitle . '一覧';
 		$this->search = 'petit_blog_custom_fields_index';
 		$this->help = 'petit_blog_custom_fields_index';
 		
 		parent::admin_index();
-		
 	}
+	
 /**
  * [ADMIN] 編集
  * 
  * @param int $id
  * @return void
- * @access public
  */
-	function admin_edit($id = null) {
-		
+	public function admin_edit($id = null) {
 		if(!$id) {
 			$this->setMessage('無効な処理です。', true);
 			$this->redirect(array('action' => 'index'));			
@@ -111,31 +105,26 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		
 		$this->pageTitle = $this->adminTitle . '編集';
 		$this->render('form');
-		
 	}
+	
 /**
  * [ADMIN] 削除
  *
  * @param int $id
  * @return void
- * @access public
  */
-	function admin_delete($id = null) {
-		
+	public function admin_delete($id = null) {
 		parent::admin_delete($id);
-		
 	}
+	
 /**
  * ブログ記事のプチ・カスタムフィールドを、ブログ別に一括で登録する
  *   ・プチ・カスタムフィールドの登録がないブログ記事に登録する
  * 
  * @return void
- * @access public
  */
-	function admin_batch() {
-		
+	public function admin_batch() {
 		if($this->data) {
-			
 			// 既にプチ・カスタムフィールド登録のあるブログ記事は除外する
 			// 登録済のプチ・カスタムフィールドを取得する
 			$petitCustomFields = $this->PetitBlogCustomField->find('list', array(
@@ -223,15 +212,14 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		$this->pageTitle = $this->adminTitle . '一括設定';
 		
 	}
+	
 /**
  * 一覧用の検索条件を生成する
  *
  * @param array $data
  * @return array $conditions
- * @access protected
  */
-	function _createAdminIndexConditions($data) {
-		
+	protected function _createAdminIndexConditions($data) {
 		$conditions = array();
 		$name = '';
 		$blogContentId = '';
@@ -286,7 +274,6 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		} else {
 			return array();
 		}
-		
 	}
 	
 }
