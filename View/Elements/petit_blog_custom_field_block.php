@@ -1,15 +1,15 @@
 <?php
 /**
- * [PUBLISH] petit_blog_custom_field
+ * [PUBLISH] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
 ?>
-<?php if(!empty($post)): ?>
-	<?php if($petitBlogCustomField->judgeStatus($post)): ?>
+<?php if (!empty($post)): ?>
+	<?php if ($petitBlogCustomField->judgeStatus($post)): ?>
 <div id="PetitBlogCustomFieldBlock">
 	<div class="post-body">
 		<dl>

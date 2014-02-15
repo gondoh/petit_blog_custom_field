@@ -1,33 +1,33 @@
 <?php
 /**
- * [ADMIN] petit_blog_custom_field
+ * [ADMIN] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
 ?>
-<?php $bcBaser->element('pagination') ?>
+<?php $this->BcBaser->element('pagination') ?>
 
 <table cellpadding="0" cellspacing="0" class="list-table sort-table" id="ListTable">
 	<thead>
 		<tr><th style="width: 50px;">操作</th>
-			<th><?php echo $paginator->sort(array(
-					'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' NO',
-					'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' NO'),
-					'id', array('escape' => false, 'class' => 'btn-direction')) ?>
+			<th><?php echo $this->Paginator->sort('id', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' NO',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' NO'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
 			<th>
-				<?php echo $paginator->sort(array(
-					'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' ブログ名',
-					'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' ブログ名'),
-					'blog_content_id', array('escape' => false, 'class' => 'btn-direction')) ?>
+				<?php echo $this->Paginator->sort('blog_content_id', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' ブログ名',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' ブログ名'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
-			<th><?php echo $paginator->sort(array(
-					'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' カスタムフィールドの利用',
-					'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' カスタムフィールドの利用'),
-					'status', array('escape' => false, 'class' => 'btn-direction')) ?>
+			<th><?php echo $this->Paginator->sort('status', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' カスタムフィールドの利用',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' カスタムフィールドの利用'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
 			<th>name</th>
 			<th>name_2</th>
@@ -35,22 +35,22 @@
 			<th>radio</th>
 			<th>select</th>
 			<th>date</th>
-			<th><?php echo $paginator->sort(array(
-					'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 登録日',
-					'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 登録日'),
-					'created', array('escape' => false, 'class' => 'btn-direction')) ?>
+			<th><?php echo $this->Paginator->sort('created', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 登録日',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 登録日'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
 				<br />
-				<?php echo $paginator->sort(array(
-					'asc' => $bcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 更新日',
-					'desc' => $bcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 更新日'),
-					'modified', array('escape' => false, 'class' => 'btn-direction')) ?>
+				<?php echo $this->Paginator->sort('modified', array(
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 更新日',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 更新日'),
+					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 <?php if(!empty($datas)): ?>
 	<?php foreach($datas as $data): ?>
-		<?php $bcBaser->element('petit_blog_custom_field_configs/index_row', array('data' => $data)) ?>
+		<?php $this->BcBaser->element('petit_blog_custom_field_configs/index_row', array('data' => $data)) ?>
 	<?php endforeach; ?>
 <?php else: ?>
 	<tr>
@@ -61,4 +61,4 @@
 </table>
 
 <!-- list-num -->
-<?php $bcBaser->element('list_num') ?>
+<?php $this->BcBaser->element('list_num') ?>

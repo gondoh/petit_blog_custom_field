@@ -1,15 +1,15 @@
 <?php
 /**
- * [ADMIN] petit_blog_custom_field
+ * [ADMIN] PetitBlogCustomField
  *
- * @copyright		Copyright 2013, materializing.
  * @link			http://www.materializing.net/
  * @author			arata
+ * @package			PetitBlogCustomField
  * @license			MIT
  */
 ?>
-<?php echo $bcForm->create('PetitBlogCustomFieldConfig', array('action' => 'first')) ?>
-<?php echo $bcForm->input('PetitBlogCustomFieldConfig.active', array('type' => 'hidden', 'value' => '1')) ?>
+<?php echo $this->BcForm->create('PetitBlogCustomFieldConfig', array('action' => 'first')) ?>
+<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.active', array('type' => 'hidden', 'value' => '1')) ?>
 <table cellpadding="0" cellspacing="0" class="form-table section" id="ListTable">
 	<tr>
 		<th class="col-head">
@@ -25,10 +25,10 @@
 </table>
 
 <div class="submit">
-	<?php echo $bcForm->submit('作成する', array(
+	<?php echo $this->BcForm->submit('作成する', array(
 		'div' => false,
 		'class' => 'btn-red button',
 		'id' => 'BtnSubmit',
 		'onClick'=>"return confirm('プチ・カスタムフィールド設定データの作成を行いますが良いですか？')")) ?>
 </div>
-<?php echo $bcForm->end() ?>
+<?php echo $this->BcForm->end() ?>
