@@ -9,18 +9,15 @@
  */
 class PetitBlogCustomFieldViewEventListener extends BcViewEventListener {
 /**
- * 登録フック
+ * 登録イベント
  *
  * @var array
  */
-	public $registerHooks = array('beforeRender', 'afterFormCreate', 'afterElement');
-	
-/**
- * ビュー
- * 
- * @var View 
- */
-	public $View = null;
+	public $events = array(
+		'BlogPost.beforeRender',
+		'BlogContent.beforeRender',
+		'Blog.afterElement'
+	);
 	
 /**
  * petit_blog_custom_field設定情報
@@ -30,104 +27,46 @@ class PetitBlogCustomFieldViewEventListener extends BcViewEventListener {
 	public $petitBlogCustomFieldConfigs = array();
 	
 /**
- * Construct 
- * 
- */
-	public function __construct() {
-		parent::__construct();
-		$this->View = ClassRegistry::getObject('view');
-	}
-	
-/**
- * beforeRender
+ * blogPostBeforeRender
  * 
  * @return void 
  */
-	public function beforeRender() {
-		parent::beforeRender();
-		
+	public function blogPostBeforeRender(CakeEvent $event) {
+		$View = $event->subject();
 		// ブログページ表示の際に実行
-		if(empty($this->request->params['admin'])) {
-			if(!empty($this->request->params['plugin'])) {
-				if($this->request->params['plugin'] == 'blog') {
-					if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
-						$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-					}else {
-						$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-					}
-					// 404に遷移した場合などで undifined が出るため判定する
-					if(!empty($this->View->viewVars['blogContent']['BlogContent']['id'])) {
-						$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $this->View->viewVars['blogContent']['BlogContent']['id']);
-					}
-				}
+		if (BcUtil::isAdminSystem()) {
+			if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
+				$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+			} else {
+				$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+			}
+			// 404に遷移した場合などで undifined が出るため判定する
+			if (!empty($View->viewVars['blogContent']['BlogContent']['id'])) {
+				$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $View->viewVars['blogContent']['BlogContent']['id']);
 			}
 		}
 	}
 	
 /**
- * afterFormCreate
+ * blogAfterElement
  * 
- * @param Object $form
- * @param string $id
- * @param string $out
+ * @param CakeEvent $event
  * @return string
  */
-	public function afterFormCreate($form, $id, $out) {
-		if($form->params['controller'] == 'blog_posts'){
-			if(!empty($form->data['PetitBlogCustomFieldConfig']['status'])) {
-				// ブログ記事追加画面にプチ・カスタムフィールド編集欄を追加する
-				if($this->action == 'admin_add'){
-					if($id == 'BlogPostForm') {
-						$out = $out . $this->View->element('admin/petit_blog_custom_field_form', array('plugin' => 'petit_blog_custom_field'));
-					}
-				}
-				// ブログ記事編集画面にプチ・カスタムフィールド編集欄を追加する
-				if($this->action == 'admin_edit'){
-					if($id == 'BlogPostForm') {
-						$out = $out . $this->View->element('admin/petit_blog_custom_field_form', array('plugin' => 'petit_blog_custom_field'));
-					}
-				}
-			}
-		}
-		
-		if($form->params['controller'] == 'blog_contents'){
-			// ブログ設定編集画面にプチ・カスタムフィールド設定欄を表示する
-			if($this->action == 'admin_edit'){
-				if($id == 'BlogContentEditForm') {
-					$out = $out . $this->View->element('admin/petit_blog_custom_field_config_form', array('plugin' => 'petit_blog_custom_field'));
-				}
-			}
-			// ブログ追加画面にプチ・カスタムフィールド設定欄を表示する
-			if($this->action == 'admin_add'){
-				if($id == 'BlogContentAddForm') {
-					$out = $out . $this->View->element('admin/petit_blog_custom_field_config_form', array('plugin' => 'petit_blog_custom_field'));
-				}
-			}
-		}
-		
-		return $out;
-	}
-	
-/**
- * afterElement
- *
- * @param string $name
- * @param string $out
- * @return string
- */
-	public function afterElement($name, $out) {
-		if($name == 'blog_tag') {
+	public function blogAfterElement(CakeEvent $event) {
+		$View = $event->subject();
+		if($event->data['name'] == 'blog_tag') {
 			if($this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig']['status']) {
-				if($this->View->viewVars['post']['PetitBlogCustomField']['status']) {
-					$post = $this->View->viewVars['post'];
+				if($View->viewVars['post']['PetitBlogCustomField']['status']) {
+					$post = $View->viewVars['post'];
 					// TODO ヘルパが自動初期化されないので明示的に初期化
 					$this->bcBaser = new BcBaserHelper();
 					$petitBlogCustomParts = $this->bcBaser->getElement('petit_blog_custom_field_block', array('plugin' => 'petit_blog_custom_field', 'post' => $post));
-					$out = $petitBlogCustomParts . $out;
-				}				
+					$event->data['out'] = $petitBlogCustomParts . $event->data['out'];
+				}
 			}
 		}
-		return $out;
+		return $event->data['out'];
 	}
 	
 }

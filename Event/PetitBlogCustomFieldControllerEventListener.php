@@ -9,13 +9,19 @@
  */
 class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListener {
 /**
- * 登録フック
+ * 登録イベント
  *
  * @var array
- * @access public
  */
-	var $registerHooks = array(
-		'initialize', 'startup', 'beforeRender', 'beforeRedirect', 'afterBlogPostAdd', 'afterBlogPostEdit');
+	public $events = array(
+		'initialize',
+		'startup',
+		'beforeRender',
+		'beforeRedirect',
+		'afterBlogPostAdd',
+		'afterBlogPostEdit'
+	);
+	
 /**
  * petit_blog_custom_fieldヘルパー
  * 
@@ -44,29 +50,20 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  * @access public
  */
 	var $PetitBlogCustomFieldConfigModel = null;
-/**
- * constructer
- * 
- * @return void
- * @access private
- */
-	function __construct() {
-		parent::__construct();
-
-	}
+	
 /**
  * initialize
  * 
  * @param Controller $controller 
  */
-	function initialize($controller) {
-		
+	function initialize(CakeEvent $event) {
+		$Controller = $event->subject();
 		App::import('Helper', 'PetitBlogCustomField.PetitBlogCustomField');
 		$this->PetitBlogCustomField = new PetitBlogCustomFieldHelper();
 		// PetitBlogCustomFieldヘルパーの追加
-		$controller->helpers[] = 'PetitBlogCustomField.PetitBlogCustomField';
-		
+		$Controller->helpers[] = 'PetitBlogCustomField.PetitBlogCustomField';
 	}
+	
 /**
  * startup
  * 
