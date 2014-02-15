@@ -77,23 +77,23 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 			$this->redirect(array('action' => 'index'));			
 		}
 		
-		if(empty($this->data)) {
+		if(empty($this->request->data)) {
 			$this->{$this->modelClass}->id = $id;
-			$this->data = $this->{$this->modelClass}->read();
+			$this->request->data = $this->{$this->modelClass}->read();
 			$configData = $this->PetitBlogCustomFieldConfig->find('first', array(
 				'conditions' => array(
-					'PetitBlogCustomFieldConfig.blog_content_id' => $this->data[$this->modelClass]['blog_content_id']
+					'PetitBlogCustomFieldConfig.blog_content_id' => $this->request->data[$this->modelClass]['blog_content_id']
 				)));
-			$this->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
+			$this->request->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
 		} else {
 			$configData = $this->PetitBlogCustomFieldConfig->find('first', array(
 				'conditions' => array(
-					'PetitBlogCustomFieldConfig.blog_content_id' => $this->data[$this->modelClass]['blog_content_id']
+					'PetitBlogCustomFieldConfig.blog_content_id' => $this->request->data[$this->modelClass]['blog_content_id']
 				)));
-			$this->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
+			$this->request->data['PetitBlogCustomFieldConfig'] = $configData['PetitBlogCustomFieldConfig'];
 
-			$this->{$this->modelClass}->set($this->data);
-			if ($this->{$this->modelClass}->save($this->data)) {
+			$this->{$this->modelClass}->set($this->request->data);
+			if ($this->{$this->modelClass}->save($this->request->data)) {
 				$this->setMessage('更新が完了しました。');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -124,11 +124,11 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
  * @return void
  */
 	public function admin_batch() {
-		if($this->data) {
+		if($this->request->data) {
 			// 既にプチ・カスタムフィールド登録のあるブログ記事は除外する
 			// 登録済のプチ・カスタムフィールドを取得する
 			$petitCustomFields = $this->PetitBlogCustomField->find('list', array(
-				'conditions' => array('PetitBlogCustomField.blog_content_id' => $this->data['PetitBlogCustomField']['blog_content_id']),
+				'conditions' => array('PetitBlogCustomField.blog_content_id' => $this->request->data['PetitBlogCustomField']['blog_content_id']),
 				'fields' => 'blog_post_id',
 				'recursive' => -1));
 			// プチ・カスタムフィールドの登録がないブログ記事を取得する
@@ -137,13 +137,13 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 				$datas = $BlogPostModel->find('all', array(
 					'conditions' => array(
 						'NOT' => array('BlogPost.id' => $petitCustomFields),
-						'BlogPost.blog_content_id' => $this->data['PetitBlogCustomField']['blog_content_id']),
+						'BlogPost.blog_content_id' => $this->request->data['PetitBlogCustomField']['blog_content_id']),
 					'fields' => array('id', 'no', 'name'),
 					'recursive' => -1));
 			} else {
 				$datas = $BlogPostModel->find('all', array(
 					'conditions' => array(
-						'BlogPost.blog_content_id' => $this->data['PetitBlogCustomField']['blog_content_id']),
+						'BlogPost.blog_content_id' => $this->request->data['PetitBlogCustomField']['blog_content_id']),
 					'fields' => array('id', 'no', 'name'),
 					'recursive' => -1));
 			}
@@ -153,13 +153,13 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 			if($datas) {
 				foreach ($datas as $data) {
 					
-					$this->data['PetitBlogCustomField']['blog_post_id'] = $data['BlogPost']['id'];
-					$this->data['PetitBlogCustomField']['blog_post_no'] = $data['BlogPost']['no'];
-					$this->data['PetitBlogCustomField']['radio'] = 0;
-					$this->data['PetitBlogCustomField']['select'] = 0;
+					$this->request->data['PetitBlogCustomField']['blog_post_id'] = $data['BlogPost']['id'];
+					$this->request->data['PetitBlogCustomField']['blog_post_no'] = $data['BlogPost']['no'];
+					$this->request->data['PetitBlogCustomField']['radio'] = 0;
+					$this->request->data['PetitBlogCustomField']['select'] = 0;
 					
-					$this->PetitBlogCustomField->create($this->data);
-					if($this->PetitBlogCustomField->save($this->data, false)) {
+					$this->PetitBlogCustomField->create($this->request->data);
+					if($this->PetitBlogCustomField->save($this->request->data, false)) {
 						$count++;
 					} else {
 						$this->log('ID:' . $data['BlogPost']['id'] . 'のブログ記事のプチ・カスタムフィールド登録に失敗');

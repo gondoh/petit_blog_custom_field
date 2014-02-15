@@ -88,7 +88,7 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 				'sortmode' => 0));
 		$this->setViewConditions($this->modelClass, array('default' => $default));
 		
-		$conditions = $this->_createAdminIndexConditions($this->data);
+		$conditions = $this->_createAdminIndexConditions($this->request->data);
 		$this->paginate = array(
 			'conditions'	=> $conditions,
 			'fields'		=> array(),
@@ -113,12 +113,12 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 			$this->redirect(array('action' => 'index'));			
 		}
 		
-		if(empty($this->data)) {
+		if(empty($this->request->data)) {
 			$this->{$this->modelClass}->id = $id;
-			$this->data = $this->{$this->modelClass}->read();
+			$this->request->data = $this->{$this->modelClass}->read();
 		} else {
-			$this->{$this->modelClass}->set($this->data);
-			if ($this->{$this->modelClass}->save($this->data)) {
+			$this->{$this->modelClass}->set($this->request->data);
+			if ($this->{$this->modelClass}->save($this->request->data)) {
 				$this->setMessage('更新が完了しました。');
 				$this->redirect(array('action' => 'index'));
 			} else {

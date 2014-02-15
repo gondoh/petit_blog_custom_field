@@ -94,17 +94,17 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
  * @return void
  */
 	public function admin_first() {
-		if($this->data) {
+		if($this->request->data) {
 			$count = 0;
 			if($this->blogContentDatas) {
 				foreach ($this->blogContentDatas as $key => $blog) {
 					
 					$configData = $this->PetitBlogCustomFieldConfig->findByBlogContentId($key);
 					if(!$configData) {
-						$this->data['PetitBlogCustomFieldConfig']['blog_content_id'] = $key;
-						$this->data['PetitBlogCustomFieldConfig']['status'] = true;
-						$this->PetitBlogCustomFieldConfig->create($this->data);
-						if(!$this->PetitBlogCustomFieldConfig->save($this->data, false)) {
+						$this->request->data['PetitBlogCustomFieldConfig']['blog_content_id'] = $key;
+						$this->request->data['PetitBlogCustomFieldConfig']['status'] = true;
+						$this->PetitBlogCustomFieldConfig->create($this->request->data);
+						if(!$this->PetitBlogCustomFieldConfig->save($this->request->data, false)) {
 							$this->log(sprintf('ブログID：%s の登録に失敗しました。', $key));
 						} else {
 							$count++;
