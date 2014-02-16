@@ -15,7 +15,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  */
 	public $events = array(
 		'initialize',
-		'startup',
+		'Blog.Blog.startup',
 		'beforeRender',
 		'beforeRedirect',
 		'afterBlogPostAdd',
@@ -26,76 +26,66 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  * petit_blog_custom_fieldヘルパー
  * 
  * @var PetitBlogCustomFieldHelper
- * @access public
  */
-	var $PetitBlogCustomField = null;
+	public $PetitBlogCustomField = null;
+	
 /**
  * petit_blog_custom_field設定情報
  * 
  * @var array
- * @access public
  */
-	var $petitBlogCustomFieldConfigs = array();
+	public $petitBlogCustomFieldConfigs = array();
+	
 /**
  * petit_blog_custom_fieldモデル
  * 
  * @var Object
- * @access public
  */
-	var $PetitBlogCustomFieldModel = null;
+	public $PetitBlogCustomFieldModel = null;
+	
 /**
  * petit_blog_custom_field設定モデル
  * 
  * @var Object
- * @access public
  */
-	var $PetitBlogCustomFieldConfigModel = null;
+	public $PetitBlogCustomFieldConfigModel = null;
 	
 /**
  * initialize
  * 
  * @param Controller $controller 
  */
-	function initialize(CakeEvent $event) {
+	public function initialize(CakeEvent $event) {
 		$Controller = $event->subject();
-		App::import('Helper', 'PetitBlogCustomField.PetitBlogCustomField');
-		$this->PetitBlogCustomField = new PetitBlogCustomFieldHelper();
+//		App::import('Helper', 'PetitBlogCustomField.PetitBlogCustomField');
+//		$this->PetitBlogCustomField = new PetitBlogCustomFieldHelper();
 		// PetitBlogCustomFieldヘルパーの追加
 		$Controller->helpers[] = 'PetitBlogCustomField.PetitBlogCustomField';
 	}
 	
 /**
- * startup
+ * blogBlogStartup
  * 
- * @param Controller $controller 
- * @return void
- * @access public
+ * @param CakeEvent $event
  */
-	function startup($controller) {
-		
-		// ブログページ表示の際に実行
-		if(!empty($controller->params['plugin'])) {
-			if($controller->params['plugin'] == 'blog') {
-				if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
-					$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-				}else {
-					$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-				}
-				$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $controller->BlogContent->id);
-				$this->PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
-			}
+	public function blogBlogStartup(CakeEvent $event) {
+		$Controller = $event->subject();
+		if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
+			$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+		}else {
+			$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
 		}
-
+		$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $Controller->BlogContent->id);
+		$this->PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
 	}
+	
 /**
  * beforeRender
  * 
  * @param Controller $controller 
  * @return void
- * @access public
  */
-	function beforeRender($controller) {
-		
+	public function beforeRender($controller) {
 		// プレビューの際は編集欄の内容を送る
 		if($controller->name == 'Blog') {
 			// 設定値を送る
@@ -185,6 +175,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		}
 		
 	}
+	
 /**
  * beforeRedirect
  * 
@@ -193,10 +184,8 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  * @param type $status
  * @param type $exit
  * @return void
- * @access public
  */
-	function beforeRedirect($controller, $url, $status, $exit) {
-		
+	public function beforeRedirect($controller, $url, $status, $exit) {
 		if($controller->name == 'BlogContents') {
 			if($controller->action == 'admin_edit') {
 				// ブログ設定編集保存時に設定情報を保存する
@@ -212,47 +201,41 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 				}
 			}
 		}
-		
 	}
+	
 /**
  * afterBlogPostAdd
  *
  * @param Controller $controller
  * @return void
- * @access public
  */
 	function afterBlogPostAdd($controller) {
-		
 		// ブログ記事保存時にエラーがなければ保存処理を実行
 		if(empty($controller->BlogPost->validationErrors)) {
 			$this->_dataSaving($controller);
 		}
-		
 	}
+	
 /**
  * afterBlogPostEdit
  *
  * @param Controller $controller
  * @return void
- * @access public
  */
-	function afterBlogPostEdit($controller) {
-		
+	public function afterBlogPostEdit($controller) {
 		// ブログ記事保存時にエラーがなければ保存処理を実行
 		if(empty($controller->BlogPost->validationErrors)) {
 			$this->_dataSaving($controller);
 		}
-		
 	}
+	
 /**
  * プチ・カスタムフィールド情報を保存する
  * 
  * @param Controller $controller 
  * @return void
- * @access private
  */
-	function _dataSaving($controller) {
-		
+	protected function _dataSaving($controller) {
 		$controller->data['PetitBlogCustomField']['blog_content_id'] = $controller->data['BlogPost']['blog_content_id'];
 		$controller->data['PetitBlogCustomField']['blog_post_no'] = $controller->data['BlogPost']['no'];
 		
@@ -271,7 +254,6 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		if(!$this->PetitBlogCustomFieldModel->save($controller->data['PetitBlogCustomField'], false)) {
 			$this->log('ブログ記事ID：' . $controller->data['PetitBlogCustomField']['blog_post_id'] . 'のプチ・カスタムフィールド情報保存に失敗しました。');
 		}
-		
 	}
 	
 }
