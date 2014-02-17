@@ -42,7 +42,7 @@ $(window).load(function() {
 </script>
 <?php endif ?>
 
-<?php if($this->action != 'admin_add'): ?>
+<?php if($this->request->action != 'admin_add'): ?>
 	<?php echo $this->BcForm->input('PetitBlogCustomField.id', array('type' => 'hidden')) ?>
 <?php endif ?>
 
