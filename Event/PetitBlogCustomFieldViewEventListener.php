@@ -29,7 +29,7 @@ class PetitBlogCustomFieldViewEventListener extends BcViewEventListener {
 /**
  * blogPostBeforeRender
  * 
- * @return void 
+ * @param CakeEvent $event
  */
 	public function blogPostBeforeRender(CakeEvent $event) {
 		$View = $event->subject();
