@@ -1,33 +1,43 @@
 <?php 
-/* SVN FILE: $Id$ */
-/* PetitBlogCustomFieldConfigs schema generated on: 2013-06-09 21:06:01 : 1370781541*/
 class PetitBlogCustomFieldConfigsSchema extends CakeSchema {
-	var $name = 'PetitBlogCustomFieldConfigs';
 
-	var $file = 'petit_blog_custom_field_configs.php';
+	public $file = 'petit_blog_custom_field_configs.php';
 
-	var $connection = 'plugin';
+	public $connection = 'plugin';
 
-	function before($event = array()) {
+	public function before($event = array()) {
 		return true;
 	}
 
-	function after($event = array()) {
+	public function after($event = array()) {
 	}
 
-	var $petit_blog_custom_field_configs = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 8, 'key' => 'primary'),
-		'blog_content_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 1),
-		'status' => array('type' => 'boolean', 'null' => true, 'default' => NULL),
+	public $petit_blog_custom_field_configs = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 8, 'key' => 'primary'),
+		'blog_content_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 1),
+		'status' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'use_name' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_name_2' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_content' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_radio' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_select' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_date' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
-		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'use_text_sub_1' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_2' => array('type' => 'boolean', 'null' => true, 'default' => null),
+		'use_text_sub_3' => array('type' => 'boolean', 'null' => true, 'default' => null),
+		'use_text_sub_4' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_5' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_6' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_7' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_8' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_9' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'use_text_sub_10' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
+		'indexes' => array(
+			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+		),
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
+
 }
-?>
