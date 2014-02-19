@@ -121,6 +121,27 @@ class PetitBlogCustomFieldHelper extends AppHelper {
 	}
 	
 /**
+ * 「サブテキスト」を取得する
+ *
+ * @param array $post
+ * @param array $options
+ * @return string
+ */
+	public function getPbcfSubText($post, $options = array()) {
+		if($this->judgeStatus($post)) {
+			$_options = array(
+				'num' => 1
+			);
+			$options = array_merge($_options, $options);
+			
+			if(!empty($post['PetitBlogCustomField']['text_sub_'. $options['num']])) {
+				return $post['PetitBlogCustomField']['text_sub_'. $options['num']];
+			}
+		}
+		return;
+	}
+	
+/**
  * カスタムフィールドの有効を判定する
  * 
  * @param array $post
