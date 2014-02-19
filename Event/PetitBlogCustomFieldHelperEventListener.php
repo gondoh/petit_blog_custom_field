@@ -29,13 +29,13 @@ class PetitBlogCustomFieldHelperEventListener extends BcHelperEventListener {
 		if($Form->request->params['controller'] == 'blog_posts'){
 			if(!empty($Form->request->data['PetitBlogCustomFieldConfig']['status'])) {
 				// ブログ記事追加画面にプチ・カスタムフィールド編集欄を追加する
-				if($this->request->action == 'admin_add'){
+				if($Form->request->action == 'admin_add'){
 					if($event->data['id'] == 'BlogPostForm') {
 						$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_form');
 					}
 				}
 				// ブログ記事編集画面にプチ・カスタムフィールド編集欄を追加する
-				if($this->request->action == 'admin_edit'){
+				if($Form->request->action == 'admin_edit'){
 					if($event->data['id'] == 'BlogPostForm') {
 						$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_form');
 					}
@@ -45,20 +45,20 @@ class PetitBlogCustomFieldHelperEventListener extends BcHelperEventListener {
 		
 		if($Form->request->params['controller'] == 'blog_contents'){
 			// ブログ設定編集画面にプチ・カスタムフィールド設定欄を表示する
-			if($this->request->action == 'admin_edit'){
-				if($event->data[0] == 'BlogContentEditForm') {
-					$event->data[1] = $event->data[1] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
+			if($Form->request->action == 'admin_edit'){
+				if($event->data['id'] == 'BlogContentAdminEditForm') {
+					$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
 				}
 			}
 			// ブログ追加画面にプチ・カスタムフィールド設定欄を表示する
-			if($this->request->action == 'admin_add'){
-				if($event->data[0] == 'BlogContentAddForm') {
-					$event->data[1] = $event->data[1] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
+			if($Form->request->action == 'admin_add'){
+				if($event->data['id'] == 'BlogContentAdminAddForm') {
+					$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
 				}
 			}
 		}
 		
-		return $event->data;
+		return $event->data['out'];
 	}
 	
 }
