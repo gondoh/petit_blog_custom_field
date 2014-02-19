@@ -28,9 +28,6 @@
 	<td>
 		<?php echo $blogContentDatas[$data['PetitBlogCustomField']['blog_content_id']] ?>
 	</td>
-	<td style="width: 45px;">
-		<?php echo $data['PetitBlogCustomField']['blog_post_no'] ?>
-	</td>
 	<td>
 		<?php echo $data['PetitBlogCustomField']['name'] ?>
 	</td>

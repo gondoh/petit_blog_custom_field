@@ -24,12 +24,6 @@
 					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' ブログ名'),
 					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
-			<th>
-				<?php echo $this->Paginator->sort('blog_post_no', array(
-					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' 記事NO',
-					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' 記事NO'),
-					array('escape' => false, 'class' => 'btn-direction')) ?>
-			</th>
 			<th><?php echo $this->Paginator->sort('name', array(
 					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' '. $customFieldConfig['field_name']['name'],
 					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' '. $customFieldConfig['field_name']['name']),

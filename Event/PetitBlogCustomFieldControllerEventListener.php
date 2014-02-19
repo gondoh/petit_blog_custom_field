@@ -100,26 +100,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 			$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
-		}
-
-		// Ajaxコピー処理時に実行
-		//   ・Ajax削除時は、内部的に Model->delete が呼ばれているため afterDelete で処理可能
-		if($Controller->request->params['action'] == 'admin_ajax_copy') {
-			// ブログ記事コピー保存時にエラーがなければ保存処理を実行
-			if(empty($Controller->BlogPost->validationErrors)) {
-				$petitBlogCustomFieldData = array();
-				$petitBlogCustomFieldData['PetitBlogCustomField']['blog_post_id'] = $Controller->viewVars['data']['BlogPost']['id'];
-				$petitBlogCustomFieldData['PetitBlogCustomField']['blog_content_id'] = $Controller->viewVars['data']['BlogPost']['blog_content_id'];
-				$petitBlogCustomFieldData['PetitBlogCustomField']['blog_post_no'] = $Controller->viewVars['data']['BlogPost']['no'];
-				//$petitBlogCustomFieldData['PetitBlogCustomField']['name'] = $Controller->viewVars['data']['BlogPost']['name'];
-
-				$this->PetitBlogCustomFieldModel->create($petitBlogCustomFieldData);
-				$this->PetitBlogCustomFieldModel->save($petitBlogCustomFieldData, false);
-				// キャッシュの削除を行わないと、登録したプチ・カスタムフィールドがブログ記事編集画面に反映されない
-				clearAllCache();
-			}
-		}
-		
+		}		
 	}
 	
 /**
@@ -144,30 +125,6 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 			$defalut = $this->PetitBlogCustomFieldConfigModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $defalut['PetitBlogCustomFieldConfig'];
 		}
-
-		// Ajaxコピー処理時に実行
-		//   ・Ajax削除時は、内部的に Model->delete が呼ばれているため afterDelete で処理可能
-		if($Controller->request->params['action'] == 'admin_ajax_copy') {
-			// ブログコピー保存時にエラーがなければ保存処理を実行
-			if(empty($Controller->BlogContent->validationErrors)) {
-				$configData = $this->PetitBlogCustomFieldConfigModel->findByBlogContentId($Controller->params['pass']['0']);
-				// もしプチ・カスタムフィールド設定の初期データ作成を行ってない事を考慮して判定している
-				$saveData = array();
-				if($configData) {
-					$saveData['PetitBlogCustomFieldConfig']['blog_content_id'] = $Controller->viewVars['data']['BlogContent']['id'];
-					$saveData['PetitBlogCustomFieldConfig']['status'] = $configData['PetitBlogCustomFieldConfig']['status'];
-				} else {
-					$saveData['PetitBlogCustomFieldConfig']['blog_content_id'] = $Controller->viewVars['data']['BlogContent']['id'];
-					$saveData['PetitBlogCustomFieldConfig']['status'] = true;
-				}
-
-				$this->PetitBlogCustomFieldConfigModel->create($saveData);
-				$this->PetitBlogCustomFieldConfigModel->save($saveData, false);
-				// キャッシュの削除を行わないと、登録したプチ・カスタムフィールド設定がプチ・カスタムフィールド編集画面に反映されない
-				clearAllCache();
-			}
-		}
-		
 	}
 	
 /**
@@ -204,7 +161,6 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  */
 	protected function _dataSaving($Controller) {
 		$Controller->request->data['PetitBlogCustomField']['blog_content_id'] = $Controller->request->data['BlogPost']['blog_content_id'];
-		$Controller->request->data['PetitBlogCustomField']['blog_post_no'] = $Controller->request->data['BlogPost']['no'];
 		
 		if($Controller->request->action == 'admin_add') {
 			$Controller->request->data['PetitBlogCustomField']['blog_post_id'] = $Controller->BlogPost->getLastInsertId();

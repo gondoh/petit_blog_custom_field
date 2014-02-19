@@ -152,9 +152,7 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 			$count = 0;
 			if($datas) {
 				foreach ($datas as $data) {
-					
 					$this->request->data['PetitBlogCustomField']['blog_post_id'] = $data['BlogPost']['id'];
-					$this->request->data['PetitBlogCustomField']['blog_post_no'] = $data['BlogPost']['no'];
 					$this->request->data['PetitBlogCustomField']['radio'] = 0;
 					$this->request->data['PetitBlogCustomField']['select'] = 0;
 					
@@ -164,12 +162,9 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 					} else {
 						$this->log('ID:' . $data['BlogPost']['id'] . 'のブログ記事のプチ・カスタムフィールド登録に失敗');
 					}
-					
 				}
 			}
-			
 			$this->setMessage($count . '件のプチ・カスタムフィールドを登録しました。', false, true);
-			
 		}
 		unset($petitCustomFields);
 		unset($datas);
@@ -208,9 +203,7 @@ class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController 
 		
 		$this->set('registerd', $registerd);
 		$this->set('blogContentDatas', $this->blogContentDatas);
-		
 		$this->pageTitle = $this->adminTitle . '一括設定';
-		
 	}
 	
 /**

@@ -203,6 +203,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 					// コピー元データがある時
 					$data['PetitBlogCustomField'] = $_data['PetitBlogCustomField'];
 					$data['PetitBlogCustomField']['blog_post_id'] = $contentId;
+					unset($data['PetitBlogCustomField']['id']);
 				} else {
 					// コピー元データがない時
 					$data['PetitBlogCustomField']['blog_post_id'] = $modelId;
@@ -256,6 +257,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 				if ($_data) {
 					// コピー元データがある時
 					$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $contentId;
+					unset($data['PetitBlogCustomFieldConfig']['id']);
 				} else {
 					// コピー元データがない時
 					$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $modelId;
