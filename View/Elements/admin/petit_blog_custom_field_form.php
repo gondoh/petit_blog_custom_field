@@ -106,7 +106,7 @@ $(window).load(function() {
 			<?php echo $this->BcForm->label('PetitBlogCustomField.content', $customFieldConfig['field_name']['textarea']) ?>
 		</th>
 		<td class="col-input">
-			<?php echo $this->BcForm->ckeditor('PetitBlogCustomField.content', null, array(
+			<?php echo $this->BcForm->ckeditor('PetitBlogCustomField.content', array(
 				'width'		=> 'auto', 
 				'height'	=> '200px', 
 				'type'		=> 'simple',
