@@ -60,19 +60,40 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$judgePetitBlogCustomFieldConfigUse = false;
+		$judgePetitBlogCustomFieldUse = false;
+		$message = '';
+		
+		// ブログ設定データを取得
+		$BlogContentModel = ClassRegistry::init('Blog.BlogContent');
+		$this->blogContentDatas = $BlogContentModel->find('list', array('recursive' => -1));
+		// プチ・ブログカスタムフィールド設定データを取得
 		$datas = $this->PetitBlogCustomFieldConfig->find('all', array('recursive' => -1));
-		if($datas) {
-			$judgePetitBlogCustomFieldConfigUse = true;
+		
+		// カスタムフィールドの設定データ数よりブログ設定データの方が多ければ、メニューを表示する
+		if (count($this->blogContentDatas) > count($datas)) {
+			$message .= '「プチ・ブログカスタムフィールド設定データ」にてプチ・ブログカスタムフィールド設定用のデータを作成して下さい。';
 		} else {
-			$message = '「プチ・ブログカスタムフィールド設定データ」にてプチ・ブログカスタムフィールド設定用のデータを作成して下さい。';
-			$this->setMessage($message, true);
+			$judgePetitBlogCustomFieldConfigUse = true;
 		}
 		$this->set('judgePetitBlogCustomFieldConfigUse', $judgePetitBlogCustomFieldConfigUse);
 		
-		// ブログ情報を取得
-		$BlogContentModel = ClassRegistry::init('Blog.BlogContent');
-		$this->blogContentDatas = $BlogContentModel->find('list', array('recursive' => -1));
+		// ブログ記事データを取得
+		$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
+		$posts = $BlogPostModel->find('list', array('recursive' => -1));
+		// ブログカスタムフィールドデータを取得
+		$customFielddatas = $this->PetitBlogCustomField->find('list', array('recursive' => -1));
 		
+		// カスタムフィールドのデータ数よりブログデータの方が多ければ、メニューを表示する
+		if (count($posts) > count($customFielddatas)) {
+			$message .= '「ブログカスタムフィールド一括設定」にてプチ・ブログカスタムフィールド設定用のデータを作成して下さい。';
+		} else {
+			$judgePetitBlogCustomFieldUse = true;
+		}
+		$this->set('judgePetitBlogCustomFieldUse', $judgePetitBlogCustomFieldUse);
+		
+		if (!$judgePetitBlogCustomFieldConfigUse || !$judgePetitBlogCustomFieldUse) {
+			$this->setMessage($message, true);
+		}
 		$this->set('customFieldConfig', Configure::read('petitBlogCustomField'));
 	}
 	

@@ -24,7 +24,7 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
  * 
  * @var array
  */
-	public $uses = array('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+	public $uses = array('PetitBlogCustomField.PetitBlogCustomField', 'PetitBlogCustomField.PetitBlogCustomFieldConfig');
 	
 /**
  * ぱんくずナビ
@@ -131,7 +131,7 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
 		$conditions = array();
 		$blogContentId = '';
 		
-		if(isset($data['PetitBlogCustomFieldConfig']['blog_content_id'])) {
+		if (isset($data['PetitBlogCustomFieldConfig']['blog_content_id'])) {
 			$blogContentId = $data['PetitBlogCustomFieldConfig']['blog_content_id'];
 		}
 		
@@ -139,23 +139,24 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
 		unset($data['PetitBlogCustomFieldConfig']['blog_content_id']);
 		
 		// 条件指定のないフィールドを解除
-		foreach($data['PetitBlogCustomFieldConfig'] as $key => $value) {
-			if($value === '') {
-				unset($data['PetitBlogCustomFieldConfig'][$key]);
+		if (!empty($data['PetitBlogCustomFieldConfig'])) {
+			foreach ($data['PetitBlogCustomFieldConfig'] as $key => $value) {
+				if($value === '') {
+					unset($data['PetitBlogCustomFieldConfig'][$key]);
+				}
+			}
+			if ($data['PetitBlogCustomFieldConfig']) {
+				$conditions = $this->postConditions($data);
 			}
 		}
 		
-		if($data['PetitBlogCustomFieldConfig']) {
-			$conditions = $this->postConditions($data);
-		}
-		
-		if($blogContentId) {
+		if ($blogContentId) {
 			$conditions = array(
 				'PetitBlogCustomFieldConfig.blog_content_id' => $blogContentId
 			);
 		}
 		
-		if($conditions) {
+		if ($conditions) {
 			return $conditions;
 		} else {
 			return array();
