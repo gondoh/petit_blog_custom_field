@@ -38,7 +38,7 @@ $(function () {
 		cursor: pointer;
 	}
 </style>
-<h3 id="textPetitBlogCustomFieldTable">プチ・カスタムフィールド</h3>
+<h3 id="textPetitBlogCustomFieldTable">カスタム項目</h3>
 <?php else: ?>
 <script type="text/javascript">
 $(window).load(function() {
@@ -67,6 +67,7 @@ $(window).load(function() {
 			<ul>
 				<li><?php echo $blogContentDatas[$this->BcForm->value('PetitBlogCustomField.blog_content_id')] ?></li>
 			</ul>
+			<?php echo $this->BcForm->input('PetitBlogCustomField.blog_content_id', array('type' => 'hidden')) ?>
 		</td>
 	</tr>
 <?php endif ?>
