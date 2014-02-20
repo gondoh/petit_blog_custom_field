@@ -7,6 +7,11 @@
  * @package			PetitBlogCustomField
  * @license			MIT
  */
+if ($this->request->params['controller'] == 'blog_contents') {
+	$blogContentId = $this->request->data['BlogContent']['id'];
+} else {
+	$blogContentId = $this->request->data['PetitBlogCustomFieldConfig']['blog_content_id'];
+}
 $style = '';
 ?>
 <?php if($this->request->params['controller'] == 'blog_contents'): ?>
@@ -63,7 +68,7 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_name', $customFieldConfig['field_name']['name'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_name', $customFieldConfig['field_name'][$blogContentId]['name'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_name', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
@@ -72,7 +77,7 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_name_2', $customFieldConfig['field_name']['name_2'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_name_2', $customFieldConfig['field_name'][$blogContentId]['name_2'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_name_2', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
@@ -81,7 +86,7 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_content', $customFieldConfig['field_name']['textarea'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_content', $customFieldConfig['field_name'][$blogContentId]['textarea'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_content', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
@@ -90,7 +95,7 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_radio', $customFieldConfig['field_name']['radio'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_radio', $customFieldConfig['field_name'][$blogContentId]['radio'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_radio', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
@@ -99,7 +104,7 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_select', $customFieldConfig['field_name']['select'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_select', $customFieldConfig['field_name'][$blogContentId]['select'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_select', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
@@ -108,12 +113,25 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_date', $customFieldConfig['field_name']['date'] .'の利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_date', $customFieldConfig['field_name'][$blogContentId]['date'] .'の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_date', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
 			<?php echo $this->BcForm->error('PetitBlogCustomFieldConfig.use_date') ?>
 		</td>
 	</tr>
+
+	<?php for($counter = 1; $counter < 11; $counter++): ?>
+	<tr>
+		<th class="col-head">
+			<?php echo $this->BcForm->label('PetitBlogCustomFieldConfig.use_text_sub_'. $counter, $customFieldConfig['field_name'][$blogContentId]['text_sub_'. $counter] .'の利用') ?>
+		</th>
+		<td class="col-input">
+			<?php echo $this->BcForm->input('PetitBlogCustomFieldConfig.use_text_sub_'. $counter, array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
+			<?php echo $this->BcForm->error('PetitBlogCustomFieldConfig.use_text_sub_'. $counter) ?>
+		</td>
+	</tr>
+	<?php endfor ?>
+	
 </table>
 </div>
