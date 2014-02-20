@@ -25,8 +25,8 @@
 					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
 			<th><?php echo $this->Paginator->sort('name', array(
-					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' '. $customFieldConfig['field_name']['name'],
-					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' '. $customFieldConfig['field_name']['name']),
+					'asc' => $this->BcBaser->getImg('admin/blt_list_down.png', array('alt' => '昇順', 'title' => '昇順')).' '. 'NAME',
+					'desc' => $this->BcBaser->getImg('admin/blt_list_up.png', array('alt' => '降順', 'title' => '降順')).' '. 'NAME'),
 					array('escape' => false, 'class' => 'btn-direction')) ?>
 			</th>
 			<th><?php echo $this->Paginator->sort('status', array(
