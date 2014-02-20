@@ -60,7 +60,7 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$judgePetitBlogCustomFieldConfigUse = false;
-		$judgePetitBlogCustomFieldUse = true;
+		$judgePetitBlogCustomFieldUse = false;
 		$message = '';
 		
 		// ブログ設定データを取得
@@ -79,7 +79,7 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 		$this->set('judgePetitBlogCustomFieldConfigUse', $judgePetitBlogCustomFieldConfigUse);
 		$this->set('judgePetitBlogCustomFieldUse', $judgePetitBlogCustomFieldUse);
 		
-		if (!$judgePetitBlogCustomFieldConfigUse || !$judgePetitBlogCustomFieldUse) {
+		if (!$judgePetitBlogCustomFieldConfigUse && !$judgePetitBlogCustomFieldUse) {
 			$this->setMessage($message, true);
 		}
 		$this->set('customFieldConfig', Configure::read('petitBlogCustomField'));
