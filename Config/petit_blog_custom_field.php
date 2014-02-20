@@ -58,24 +58,6 @@ $config['petitBlogCustomField.field_name'] = array(
 		'text_sub_8' => 'サブテキスト08',
 		'text_sub_9' => 'サブテキスト09',
 		'text_sub_10' => 'サブテキスト10'
-	),
-	2 => array(
-		'name'		=> 'テキスト',
-		'name_2'	=> 'テキスト2',
-		'textarea'	=> 'テキストエリア',
-		'radio'		=> 'ラジオ',
-		'select'	=> 'セレクト',
-		'date'		=> '日付',
-		'text_sub_1' => 'サブテキスト01',
-		'text_sub_2' => 'サブテキスト02',
-		'text_sub_3' => 'サブテキスト03',
-		'text_sub_4' => 'サブテキスト04',
-		'text_sub_5' => 'サブテキスト05',
-		'text_sub_6' => 'サブテキスト06',
-		'text_sub_7' => 'サブテキスト07',
-		'text_sub_8' => 'サブテキスト08',
-		'text_sub_9' => 'サブテキスト09',
-		'text_sub_10' => 'サブテキスト10'
 	)
 );
 /**
