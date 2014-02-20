@@ -62,8 +62,9 @@ class PetitBlogCustomField extends BcPluginAppModel {
 	public function getDefaultValue() {
 		$data = array(
 			'PetitBlogCustomField' => array(
-				'radio' => 0,
-				'select' => 0
+				'radio'		=> 0,
+				'select'	=> 0,
+				'status'	=> 1
 			)
 		);
 		return $data;
