@@ -66,19 +66,45 @@ class PetitBlogCustomFieldHelper extends AppHelper {
  */
 	public function getPbcfRadio($post, $options = array()) {
 		$_options = array(
+			'blog_content_id' => 1,
 			'invisible' => false
 		);
 		$options = array_merge($_options, $options);
 		extract($options);
 		
 		if($this->judgeStatus($post)) {
-			$config = Configure::read('petitBlogCustomField.radio');
+			$config = Configure::read('petitBlogCustomField.radio.'. $options['blog_content_id']);
 			if(!$post['PetitBlogCustomField']['radio']) {
 				if($invisible) {
 					return '';
 				}
 			}
 			return $config[$post['PetitBlogCustomField']['radio']];
+		}
+	}
+	
+/**
+ * 「ラジオ」を取得する
+ *
+ * @param array $post
+ * @param array $options
+ * @return string
+ */
+	public function getPbcfRadioValue($post, $options = array()) {
+		$_options = array(
+			'blog_content_id' => 1,
+			'invisible' => false
+		);
+		$options = array_merge($_options, $options);
+		extract($options);
+		
+		if($this->judgeStatus($post)) {
+			if(!$post['PetitBlogCustomField']['radio']) {
+				if($invisible) {
+					return '';
+				}
+			}
+			return $post['PetitBlogCustomField']['radio'];
 		}
 	}
 	
