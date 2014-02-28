@@ -73,7 +73,7 @@ $(window).load(function() {
 <?php endif ?>
 	<tr>
 		<th class="col-head">
-			<?php echo $this->BcForm->label('PetitBlogCustomField.status', 'この記事での利用') ?>
+			<?php echo $this->BcForm->label('PetitBlogCustomField.status', 'カスタム項目の利用') ?>
 		</th>
 		<td class="col-input">
 			<?php echo $this->BcForm->input('PetitBlogCustomField.status', array(

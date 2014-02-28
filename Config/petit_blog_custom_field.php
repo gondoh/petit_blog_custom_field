@@ -70,8 +70,8 @@ $config['petitBlogCustomField.field_name'] = array(
  */
 $config['petitBlogCustomField.status'] = array(
 	1 => array(
-		0 => '利用しない',
-		1 => '利用する'
+		0 => 'この記事でカスタム項目を利用しない',
+		1 => 'この記事でカスタム項目を利用する'
 	)
 );
 /**
