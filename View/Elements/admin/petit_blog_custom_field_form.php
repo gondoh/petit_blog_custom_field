@@ -18,17 +18,15 @@ $style = '';
 <?php $style = ' style="display: none;"' ?>
 <script type="text/javascript">
 $(function () {
+	$('#PetitBlogCustomFieldTable').insertBefore('.submit');
+	$('#textPetitBlogCustomFieldTable').insertBefore('#PetitBlogCustomFieldTable');
 	var PetitBlogCustomFieldStatusValue = $('input[name="data[PetitBlogCustomField][status]"]:checked').val();
-	if(PetitBlogCustomFieldStatusValue == 1) {
-		$('#PetitBlogCustomFieldTable').slideDown('slow');
-	}
-
 	$("#textPetitBlogCustomFieldTable").toggle(
 		function() {
-			$('#PetitBlogCustomFieldTable').slideDown('slow');
+			$('#PetitBlogCustomFieldTable').slideDown('normal');
 		},
 		function() {
-			$('#PetitBlogCustomFieldTable').slideUp('slow');
+			$('#PetitBlogCustomFieldTable').slideUp('normal');
 		}
 	);
 });
@@ -38,7 +36,6 @@ $(function () {
 		cursor: pointer;
 	}
 </style>
-<h3 id="textPetitBlogCustomFieldTable">カスタム項目</h3>
 <?php else: ?>
 <script type="text/javascript">
 $(window).load(function() {
@@ -47,11 +44,14 @@ $(window).load(function() {
 </script>
 <?php endif ?>
 
+<?php if($this->request->params['controller'] == 'blog_posts'): ?>
+<h3 id="textPetitBlogCustomFieldTable">カスタム項目</h3>
+<?php endif ?>
+<div id="PetitBlogCustomFieldTable">
+
 <?php if($this->request->action != 'admin_add'): ?>
 	<?php echo $this->BcForm->input('PetitBlogCustomField.id', array('type' => 'hidden')) ?>
 <?php endif ?>
-
-<div id="PetitBlogCustomFieldTable"<?php echo $style ?>>
 
 <table cellpadding="0" cellspacing="0" class="form-table section">
 <?php if($this->request->params['controller'] != 'blog_posts'): ?>
