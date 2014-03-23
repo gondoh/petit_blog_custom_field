@@ -170,9 +170,12 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		$params = Router::getParams();
 		$this->PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
 		$data = array();
+		$modelId = $oldModelId = null;
 		if ($Model->alias == 'BlogPost') {
 			$modelId = $contentId;
-			$oldModelId = $params['pass'][1];
+			if(!empty($params['pass'][1])) {
+				$oldModelId = $params['pass'][1];
+			}
 		}
 		
 		if ($contentId) {
@@ -183,7 +186,9 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		if ($params['action'] != 'admin_ajax_copy') {
 			if ($data) {
 				// 編集時
-				$data['PetitBlogCustomField'] = $Model->data['PetitBlogCustomField'];
+				if(!empty($Model->data['PetitBlogCustomField'])) {
+					$data['PetitBlogCustomField'] = $Model->data['PetitBlogCustomField'];
+				}
 			} else {
 				// 追加時
 				$data['PetitBlogCustomField']['blog_post_id'] = $contentId;
@@ -192,12 +197,15 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 			// Ajaxコピー処理時に実行
 			// ブログコピー保存時にエラーがなければ保存処理を実行
 			if (empty($Model->validationErrors)) {
-				$_data = $this->PetitBlogCustomFieldModel->find('first', array(
-					'conditions' => array(
-						'PetitBlogCustomField.blog_post_id' => $oldModelId
-					),
-					'recursive' => -1
-				));
+				$_data = array();
+				if($oldModelId) {
+					$_data = $this->PetitBlogCustomFieldModel->find('first', array(
+						'conditions' => array(
+							'PetitBlogCustomField.blog_post_id' => $oldModelId
+						),
+						'recursive' => -1
+					));
+				}
 				// XXX もしカスタムフィールド設定の初期データ作成を行ってない事を考慮して判定している
 				if ($_data) {
 					// コピー元データがある時
