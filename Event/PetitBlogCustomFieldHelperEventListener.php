@@ -14,7 +14,7 @@ class PetitBlogCustomFieldHelperEventListener extends BcHelperEventListener {
  * @var array
  */
 	public $events = array(
-		'Blog.Form.afterEnd'
+		'Form.afterEnd'
 	);
 	
 /**
@@ -23,7 +23,7 @@ class PetitBlogCustomFieldHelperEventListener extends BcHelperEventListener {
  * @param CakeEvent $event
  * @return array
  */
-	public function blogFormAfterEnd(CakeEvent $event) {
+	public function formAfterEnd(CakeEvent $event) {
 		$Form = $event->subject();
 		
 		if($Form->request->params['controller'] == 'blog_posts'){
