@@ -1,0 +1,6 @@
+PetitBlogCustomField : baserCMS Plugin
+Copyright 2014, arata  <http://www.materializing.net/>
+
+About License
+Licensed under the MIT License
+http://opensource.org/licenses/mit-license.php
