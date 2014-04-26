@@ -33,7 +33,7 @@ $(function () {
 		cursor: pointer;
 	}
 </style>
-<h3 id="textPetitBlogCustomFieldConfigTable">プチ・カスタムフィールド設定</h3>
+<h3 id="textPetitBlogCustomFieldConfigTable">カスタム項目設定</h3>
 <?php endif ?>
 
 <?php if($this->request->action != 'admin_add'): ?>
