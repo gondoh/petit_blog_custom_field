@@ -76,10 +76,22 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 			$judgePetitBlogCustomFieldConfigUse = true;
 		}
 		
+		// ブログ設定データを取得
+		$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
+		$blogPostDatas = $BlogPostModel->find('list', array('recursive' => -1));
+		// プチ・ブログカスタムフィールド設定データを取得
+		$dataList = $this->PetitBlogCustomField->find('all', array('recursive' => -1));
+		// カスタムフィールドのデータ数よりブログ記事データの方が多ければ、メニューを表示する
+		if (count($blogPostDatas) > count($dataList)) {
+			$message .= '「プチ・ブログカスタムフィールド一括設定」にてプチ・ブログカスタムフィールド用のデータを作成して下さい。';
+		} else {
+			$judgePetitBlogCustomFieldUse = true;
+		}
+		
 		$this->set('judgePetitBlogCustomFieldConfigUse', $judgePetitBlogCustomFieldConfigUse);
 		$this->set('judgePetitBlogCustomFieldUse', $judgePetitBlogCustomFieldUse);
 		
-		if (!$judgePetitBlogCustomFieldConfigUse && !$judgePetitBlogCustomFieldUse) {
+		if (!$judgePetitBlogCustomFieldConfigUse) {
 			$this->setMessage($message, true);
 		}
 		$this->set('customFieldConfig', Configure::read('petitBlogCustomField'));
