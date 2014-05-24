@@ -24,8 +24,7 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
  * 
  * @var array
  */
-	//public $uses = array('PetitBlogCustomField.PetitBlogCustomField', 'PetitBlogCustomField.PetitBlogCustomFieldConfig');
-	public $uses = array('PetitBlogCustomField.PetitBlogCustomFieldConfig');
+	public $uses = array('PetitBlogCustomField.PetitBlogCustomField', 'PetitBlogCustomField.PetitBlogCustomFieldConfig');
 	
 /**
  * ぱんくずナビ
