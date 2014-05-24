@@ -106,8 +106,8 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 			'conditions' => array('PetitBlogCustomField.blog_post_id' => $Model->id),
 			'recursive' => -1
 		));
-		if($data) {
-			if(!$PetitBlogCustomFieldModel->delete($data['PetitBlogCustomField']['id'])) {
+		if ($data) {
+			if (!$PetitBlogCustomFieldModel->delete($data['PetitBlogCustomField']['id'])) {
 				$this->log('ID:' . $data['PetitBlogCustomField']['id'] . 'のプチ・カスタムフィールドの削除に失敗しました。');
 			}
 		}
@@ -152,8 +152,8 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 			'conditions' => array('PetitBlogCustomFieldConfig.blog_content_id' => $Model->id),
 			'recursive' => -1
 		));
-		if($data) {
-			if(!$PetitBlogCustomFieldConfigModel->delete($data['PetitBlogCustomFieldConfig']['id'])) {
+		if ($data) {
+			if (!$PetitBlogCustomFieldConfigModel->delete($data['PetitBlogCustomFieldConfig']['id'])) {
 				$this->log('ID:' . $data['PetitBlogCustomFieldConfig']['id'] . 'のプチ・カスタムフィールド設定の削除に失敗しました。');
 			}
 		}		
@@ -186,7 +186,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		if ($params['action'] != 'admin_ajax_copy') {
 			if ($data) {
 				// 編集時
-				if(!empty($Model->data['PetitBlogCustomField'])) {
+				if (!empty($Model->data['PetitBlogCustomField'])) {
 					$data['PetitBlogCustomField'] = $Model->data['PetitBlogCustomField'];
 				}
 			} else {
@@ -198,7 +198,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 			// ブログコピー保存時にエラーがなければ保存処理を実行
 			if (empty($Model->validationErrors)) {
 				$_data = array();
-				if($oldModelId) {
+				if ($oldModelId) {
 					$_data = $this->PetitBlogCustomFieldModel->find('first', array(
 						'conditions' => array(
 							'PetitBlogCustomField.blog_post_id' => $oldModelId

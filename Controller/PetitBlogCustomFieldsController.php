@@ -7,10 +7,7 @@
  * @package			PetitBlogCustomField
  * @license			MIT
  */
-/**
- * Include files
- */
-App::import('Controller', 'PetitBlogCustomField.PetitBlogCustomFieldApp');
+App::uses('PetitBlogCustomFieldApp', 'PetitBlogCustomField.Controller');
 class PetitBlogCustomFieldsController extends PetitBlogCustomFieldAppController {
 /**
  * コントローラー名

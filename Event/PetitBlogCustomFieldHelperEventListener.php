@@ -26,33 +26,33 @@ class PetitBlogCustomFieldHelperEventListener extends BcHelperEventListener {
 	public function formAfterEnd(CakeEvent $event) {
 		$Form = $event->subject();
 		
-		if($Form->request->params['controller'] == 'blog_posts'){
-			if(!empty($Form->request->data['PetitBlogCustomFieldConfig']['status'])) {
+		if ($Form->request->params['controller'] == 'blog_posts'){
+			if (!empty($Form->request->data['PetitBlogCustomFieldConfig']['status'])) {
 				// ブログ記事追加画面にプチ・カスタムフィールド編集欄を追加する
-				if($Form->request->action == 'admin_add'){
-					if($event->data['id'] == 'BlogPostForm') {
+				if ($Form->request->action == 'admin_add'){
+					if ($event->data['id'] == 'BlogPostForm') {
 						$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_form');
 					}
 				}
 				// ブログ記事編集画面にプチ・カスタムフィールド編集欄を追加する
-				if($Form->request->action == 'admin_edit'){
-					if($event->data['id'] == 'BlogPostForm') {
+				if ($Form->request->action == 'admin_edit'){
+					if ($event->data['id'] == 'BlogPostForm') {
 						$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_form');
 					}
 				}
 			}
 		}
 		
-		if($Form->request->params['controller'] == 'blog_contents'){
+		if ($Form->request->params['controller'] == 'blog_contents'){
 			// ブログ設定編集画面にプチ・カスタムフィールド設定欄を表示する
-			if($Form->request->action == 'admin_edit'){
-				if($event->data['id'] == 'BlogContentAdminEditForm') {
+			if ($Form->request->action == 'admin_edit'){
+				if ($event->data['id'] == 'BlogContentAdminEditForm') {
 					$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
 				}
 			}
 			// ブログ追加画面にプチ・カスタムフィールド設定欄を表示する
-			if($Form->request->action == 'admin_add'){
-				if($event->data['id'] == 'BlogContentAdminAddForm') {
+			if ($Form->request->action == 'admin_add'){
+				if ($event->data['id'] == 'BlogContentAdminAddForm') {
 					$event->data['out'] = $event->data['out'] . $Form->element('PetitBlogCustomField.petit_blog_custom_field_config_form');
 				}
 			}

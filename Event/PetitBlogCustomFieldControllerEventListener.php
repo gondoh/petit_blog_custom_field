@@ -69,8 +69,8 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		// プレビューの際は編集欄の内容を送る
 		// 設定値を送る
 		$Controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
-		if($Controller->preview) {
-			if(!empty($Controller->request->data['PetitBlogCustomField'])) {
+		if ($Controller->preview) {
+			if (!empty($Controller->request->data['PetitBlogCustomField'])) {
 				$Controller->viewVars['post']['PetitBlogCustomField'] = $Controller->request->data['PetitBlogCustomField'];
 			}
 		}
@@ -90,10 +90,10 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 
 		// ブログ記事編集・追加画面で実行
 		// - startup で処理したかったが $Controller->request->data に入れるとそれを全て上書きしてしまうのでダメだった
-		if($Controller->request->params['action'] == 'admin_edit') {
+		if ($Controller->request->params['action'] == 'admin_edit') {
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
 		}
-		if($Controller->request->params['action'] == 'admin_add') {
+		if ($Controller->request->params['action'] == 'admin_add') {
 			$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
@@ -113,12 +113,12 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		$Controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
 
 		// ブログ設定編集画面に設定情報を送る
-		if($Controller->request->params['action'] == 'admin_edit') {
+		if ($Controller->request->params['action'] == 'admin_edit') {
 			$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->findByBlogContentId($Controller->BlogContent->id);
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
 		}
 		// ブログ追加画面に設定情報を送る
-		if($Controller->request->params['action'] == 'admin_add') {
+		if ($Controller->request->params['action'] == 'admin_add') {
 			$defalut = $this->PetitBlogCustomFieldConfigModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $defalut['PetitBlogCustomFieldConfig'];
 		}
@@ -129,10 +129,10 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  * 
  * @param type $Controller
  */
-	function modelInitializer($Controller) {
+	public function modelInitializer($Controller) {
 		if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
 			$this->PetitBlogCustomFieldConfigModel = ClassRegistry::getObject('PetitBlogCustomField.PetitBlogCustomFieldConfig');
-		}else {
+		} else {
 			$this->PetitBlogCustomFieldConfigModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomFieldConfig');
 		}
 		$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->read(null, $Controller->BlogContent->id);

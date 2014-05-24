@@ -116,7 +116,7 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 			'limit'			=> $this->passedArgs['num']
 		);
 		$datas = $this->paginate($this->modelClass);
-		if($datas) {
+		if ($datas) {
 			$this->set('datas', $datas);
 		}
 		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);
@@ -129,12 +129,12 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
  * @return void
  */
 	public function admin_edit($id = null) {
-		if(!$id) {
+		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
 			$this->redirect(array('action' => 'index'));			
 		}
 		
-		if(empty($this->request->data)) {
+		if (empty($this->request->data)) {
 			$this->{$this->modelClass}->id = $id;
 			$this->request->data = $this->{$this->modelClass}->read();
 		} else {
@@ -158,12 +158,12 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
  * @return void
  */
 	public function admin_delete($id = null) {
-		if(!$id) {
+		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
 			$this->redirect(array('action' => 'index'));
 		}
 		
-		if($this->{$this->modelClass}->delete($id)) {
+		if ($this->{$this->modelClass}->delete($id)) {
 			$message = 'NO.' . $id . 'のデータを削除しました。';
 			$this->setMessage($message);
 			$this->redirect(array('action' => 'index'));
@@ -180,11 +180,11 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
  * @return void
  */
 	public function admin_unpublish($id) {	
-		if(!$id) {
+		if (!$id) {
 			$this->setMessage('この処理は無効です。', true);
 			$this->redirect(array('action' => 'index'));
 		}
-		if($this->_changeStatus($id, false)) {
+		if ($this->_changeStatus($id, false)) {
 			$this->setMessage('「無効」状態に変更しました。');
 			$this->redirect(array('action' => 'index'));
 		}
@@ -199,11 +199,11 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
  * @return void
  */
 	public function admin_publish($id) {
-		if(!$id) {
+		if (!$id) {
 			$this->setMessage('この処理は無効です。', true);
 			$this->redirect(array('action' => 'index'));
 		}
-		if($this->_changeStatus($id, true)) {
+		if ($this->_changeStatus($id, true)) {
 			$this->setMessage('「有効」状態に変更しました。');
 			$this->redirect(array('action' => 'index'));
 		}
@@ -221,7 +221,7 @@ class PetitBlogCustomFieldAppController extends BcPluginAppController {
 	public function _changeStatus($id, $status) {
 		$data = $this->{$this->modelClass}->find('first', array('conditions' => array("$this->modelClass.id" => $id), 'recursive' => -1));
 		$data["$this->modelClass"]['status'] = $status;
-		if($status) {
+		if ($status) {
 			$data["$this->modelClass"]['status'] = true;
 		} else {
 			$data["$this->modelClass"]['status'] = false;
