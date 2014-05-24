@@ -18,6 +18,8 @@ $style = '';
 <?php $style = ' style="display: none;"' ?>
 <script type="text/javascript">
 $(function () {
+	$('#PetitBlogCustomFieldConfigTable').insertBefore('.submit');
+	$('#textPetitBlogCustomFieldConfigTable').insertBefore('#PetitBlogCustomFieldConfigTable');
 	$("#textPetitBlogCustomFieldConfigTable").toggle(
 		function() {
 			$('#PetitBlogCustomFieldConfigTable').slideDown('slow');
