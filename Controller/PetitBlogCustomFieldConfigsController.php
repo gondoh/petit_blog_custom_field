@@ -7,10 +7,7 @@
  * @package			PetitBlogCustomField
  * @license			MIT
  */
-/**
- * Include files
- */
-App::import('Controller', 'PetitBlogCustomField.PetitBlogCustomFieldApp');
+App::uses('PetitBlogCustomFieldApp', 'PetitBlogCustomField.Controller');
 class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppController {
 /**
  * コントローラー名
@@ -62,7 +59,23 @@ class PetitBlogCustomFieldConfigsController extends PetitBlogCustomFieldAppContr
 		$this->search = 'petit_blog_custom_field_configs_index';
 		$this->help = 'petit_blog_custom_field_configs_index';
 		
-		parent::admin_index();
+		$default = array(
+			'named' => array(
+				'num' => $this->siteConfigs['admin_list_num'],
+				'sortmode' => 0));
+		$this->setViewConditions('PetitBlogCustomFieldConfig', array('default' => $default));
+		
+		$conditions = $this->_createAdminIndexConditions($this->request->data);
+		$this->paginate = array(
+			'conditions'	=> $conditions,
+			'fields'		=> array(),
+			'limit'			=> $this->passedArgs['num']
+		);
+		$datas = $this->paginate('PetitBlogCustomFieldConfig');
+		if($datas) {
+			$this->set('datas', $datas);
+		}
+		$this->set('blogContentDatas', array('0' => '指定しない') + $this->blogContentDatas);
 	}
 	
 /**
