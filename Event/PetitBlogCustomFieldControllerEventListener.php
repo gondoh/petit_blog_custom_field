@@ -49,6 +49,13 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 	public $PetitBlogCustomFieldConfigModel = null;
 	
 /**
+ * petit_blog_custom_fieldフィールド名設定データ
+ * 
+ * @var array
+ */
+	public $settingsPetitBlogCustomField = array();
+	
+/**
  * initialize
  * 
  * @param CakeEvent $event
@@ -57,8 +64,9 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		$Controller = $event->subject();
 		// PetitBlogCustomFieldヘルパーの追加
 		$Controller->helpers[] = 'PetitBlogCustomField.PetitBlogCustomField';
+		$this->settingsPetitBlogCustomField = Configure::read('petitBlogCustomField');
 	}
-		
+	
 /**
  * blogBeforeRender
  * 
@@ -68,7 +76,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		$Controller = $event->subject();
 		// プレビューの際は編集欄の内容を送る
 		// 設定値を送る
-		$Controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
+		$Controller->viewVars['customFieldConfig'] = $this->settingsPetitBlogCustomField;
 		if ($Controller->preview) {
 			if (!empty($Controller->request->data['PetitBlogCustomField'])) {
 				$Controller->viewVars['post']['PetitBlogCustomField'] = $Controller->request->data['PetitBlogCustomField'];
@@ -86,48 +94,54 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		$this->modelInitializer($Controller);
 			
 		// 設定値を送る
-		$Controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
+		$Controller->viewVars['customFieldConfig'] = $this->settingsPetitBlogCustomField;
 
 		// ブログ記事編集・追加画面で実行
 		// - startup で処理したかったが $Controller->request->data に入れるとそれを全て上書きしてしまうのでダメだった
 		if ($Controller->request->params['action'] == 'admin_edit') {
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
+			
+			if ($this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig']['status']) {
+				$this->judgeExistCustomFieldConfig($Controller);
+			}
 		}
 		if ($Controller->request->params['action'] == 'admin_add') {
 			$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
-		}		
+		}
 	}
 	
 /**
  * blogContentsBeforeRender
  * 
- * @param Controller $controller
+ * @param CakeEvent $event
  */
 	public function blogBlogContentsBeforeRender(CakeEvent $event) {
 		$Controller = $event->subject();
 		$this->modelInitializer($Controller);
 		
 		// 設定値を送る
-		$Controller->viewVars['customFieldConfig'] = Configure::read('petitBlogCustomField');
-
+		$Controller->viewVars['customFieldConfig'] = $this->settingsPetitBlogCustomField;
+		
 		// ブログ設定編集画面に設定情報を送る
 		if ($Controller->request->params['action'] == 'admin_edit') {
 			$this->petitBlogCustomFieldConfigs = $this->PetitBlogCustomFieldConfigModel->findByBlogContentId($Controller->BlogContent->id);
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
+			$this->judgeExistCustomFieldConfig($Controller);
 		}
 		// ブログ追加画面に設定情報を送る
 		if ($Controller->request->params['action'] == 'admin_add') {
 			$defalut = $this->PetitBlogCustomFieldConfigModel->getDefaultValue();
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $defalut['PetitBlogCustomFieldConfig'];
+			$this->judgeExistCustomFieldConfig($Controller);
 		}
 	}
 	
 /**
  * モデル登録用メソッド
  * 
- * @param type $Controller
+ * @param Controller $Controller
  */
 	public function modelInitializer($Controller) {
 		if (ClassRegistry::isKeySet('PetitBlogCustomField.PetitBlogCustomFieldConfig')) {
@@ -139,4 +153,19 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 		$this->PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
 	}
 	
+/**
+ * ブログコンテンツ用のカスタム項目設定の有無を判定する
+ * 
+ * @param Controller $Controller
+ */
+	public function judgeExistCustomFieldConfig($Controller) {
+		if (!isset($this->settingsPetitBlogCustomField['field_name'][$Controller->BlogContent->id]) ||
+			!isset($this->settingsPetitBlogCustomField['status'][$Controller->BlogContent->id]) ||
+			!isset($this->settingsPetitBlogCustomField['radio'][$Controller->BlogContent->id]) ||
+			!isset($this->settingsPetitBlogCustomField['select'][$Controller->BlogContent->id])
+		) {
+			$message = '以下のファイルにて、このブログで利用するカスタム項目設定を定義してください。<br />/PetitBlogCustomField/Config/petit_blog_custom_field_custom.php';
+			$Controller->setMessage($message, true);
+		}
+	}
 }
