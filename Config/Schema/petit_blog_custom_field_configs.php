@@ -15,7 +15,7 @@ class PetitBlogCustomFieldConfigsSchema extends CakeSchema {
 	public $petit_blog_custom_field_configs = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 8, 'key' => 'primary'),
 		'blog_content_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 1),
-		'status' => array('type' => 'boolean', 'null' => true, 'default' => null),
+		'status' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_name' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_name_2' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
 		'use_content' => array('type' => 'boolean', 'null' => true, 'default' => '1'),
