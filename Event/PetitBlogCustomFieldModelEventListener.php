@@ -246,7 +246,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		if ($params['action'] != 'admin_ajax_copy') {
 			if ($data) {
 				// 編集時
-				$data['PetitBlogCustomFieldConfig'] = $data['PetitBlogCustomFieldConfig'];
+				$data['PetitBlogCustomFieldConfig'] = array_merge($data['PetitBlogCustomFieldConfig'], $Model->data['PetitBlogCustomFieldConfig']);
 			} else {
 				// 追加時
 				$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $contentId;
