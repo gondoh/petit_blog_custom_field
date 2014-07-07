@@ -37,6 +37,13 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 	public $PetitBlogCustomFieldConfigModel = null;
 	
 /**
+ * ブログ記事多重保存の判定
+ * 
+ * @var boolean
+ */
+	public $throwBlogPost = false;
+	
+/**
  * blogBlogPostBeforeFind
  * ブログ記事取得の際にプチ・カスタムフィールド情報も併せて取得する
  * 
@@ -81,16 +88,21 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 			$contentId = $Model->data[$Model->alias]['id'];
 		}
 		$saveData = $this->_generateSaveData($Model, $contentId);
-		if (isset($saveData['PetitBlogCustomField']['id'])) {
-			// ブログ記事編集保存時に設定情報を保存する
-			$this->PetitBlogCustomFieldModel->set($saveData);
-		} else {
-			// ブログ記事追加時に設定情報を保存する
-			$this->PetitBlogCustomFieldModel->create($saveData);
+		if (!$this->throwBlogPost) {
+			if (isset($saveData['PetitBlogCustomField']['id'])) {
+				// ブログ記事編集保存時に設定情報を保存する
+				$this->PetitBlogCustomFieldModel->set($saveData);
+			} else {
+				// ブログ記事追加時に設定情報を保存する
+				$this->PetitBlogCustomFieldModel->create($saveData);
+			}
+			if (!$this->PetitBlogCustomFieldModel->save()) {
+				$this->log(sprintf('ID：%s のカスタムフィールドの保存に失敗しました。', $Model->data['PetitBlogCustomField']['id']));
+			}
 		}
-		if (!$this->PetitBlogCustomFieldModel->save()) {
-			$this->log(sprintf('ID：%s のカスタムフィールドの保存に失敗しました。', $Model->data['PetitBlogCustomField']['id']));
-		}
+		// ブログ記事コピー保存時、アイキャッチが入っていると処理が2重に行われるため、1周目で処理通過を判定し、
+		// 2周目では保存処理に渡らないようにしている
+		$this->throwBlogPost = true;
 	}
 	
 /**
