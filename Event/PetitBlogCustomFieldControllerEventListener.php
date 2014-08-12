@@ -106,8 +106,10 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 			}
 		}
 		if ($Controller->request->params['action'] == 'admin_add') {
-			$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
-			$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
+			if ($Controller->request->data('PetitBlogCustomField') == null) {
+				$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
+				$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
+			}
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
 		}
 	}
