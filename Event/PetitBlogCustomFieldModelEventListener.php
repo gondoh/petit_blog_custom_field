@@ -71,6 +71,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		$Model = $event->subject();
 		$PetitBlogCustomFieldModel = ClassRegistry::init('PetitBlogCustomField.PetitBlogCustomField');
 		$PetitBlogCustomFieldModel->set($Model->data);
+		$this->PetitBlogCustomFieldModel = $PetitBlogCustomFieldModel;
 		return $PetitBlogCustomFieldModel->validates();
 	}
 	
@@ -261,6 +262,9 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 				$data['PetitBlogCustomFieldConfig'] = array_merge($data['PetitBlogCustomFieldConfig'], $Model->data['PetitBlogCustomFieldConfig']);
 			} else {
 				// 追加時
+				if (!empty($this->PetitBlogCustomFieldModel->data['PetitBlogCustomField'])) {
+					$data['PetitBlogCustomField'] = $this->PetitBlogCustomFieldModel->data['PetitBlogCustomField'];
+				}
 				$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $contentId;
 			}
 		} else {

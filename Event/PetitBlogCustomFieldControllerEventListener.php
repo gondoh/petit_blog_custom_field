@@ -15,7 +15,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  */
 	public $events = array(
 		'initialize',
-		'Blog.beforeRender',
+		'Blog.Blog.beforeRender',
 		'Blog.BlogPosts.beforeRender',
 		'Blog.BlogContents.beforeRender'
 	);
@@ -72,7 +72,7 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
  * 
  * @param CakeEvent $event
  */
-	public function blogBeforeRender(CakeEvent $event) {
+	public function blogBlogBeforeRender(CakeEvent $event) {
 		$Controller = $event->subject();
 		// プレビューの際は編集欄の内容を送る
 		// 設定値を送る
@@ -106,8 +106,10 @@ class PetitBlogCustomFieldControllerEventListener extends BcControllerEventListe
 			}
 		}
 		if ($Controller->request->params['action'] == 'admin_add') {
-			$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
-			$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
+			if ($Controller->request->data('PetitBlogCustomField') == null) {
+				$defalut = $this->PetitBlogCustomFieldModel->getDefaultValue();
+				$Controller->request->data['PetitBlogCustomField'] = $defalut['PetitBlogCustomField'];
+			}
 			$Controller->request->data['PetitBlogCustomFieldConfig'] = $this->petitBlogCustomFieldConfigs['PetitBlogCustomFieldConfig'];
 		}
 	}
