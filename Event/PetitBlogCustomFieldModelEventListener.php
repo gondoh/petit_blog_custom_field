@@ -248,9 +248,11 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 		$data = array();
 		if ($Model->alias == 'BlogContent') {
 			$modelId = $contentId;
-			$oldModelId = $params['pass'][0]; 
+			if (isset($params['pass'][0])) {
+				$oldModelId = $params['pass'][0];
+			}
 		}
-				
+		
 		if ($contentId) {
 			$data = $this->PetitBlogCustomFieldConfigModel->find('first', array('conditions' => array(
 				'PetitBlogCustomFieldConfig.blog_content_id' => $contentId
@@ -262,8 +264,8 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 				$data['PetitBlogCustomFieldConfig'] = array_merge($data['PetitBlogCustomFieldConfig'], $Model->data['PetitBlogCustomFieldConfig']);
 			} else {
 				// 追加時
-				if (!empty($this->PetitBlogCustomFieldModel->data['PetitBlogCustomField'])) {
-					$data['PetitBlogCustomField'] = $this->PetitBlogCustomFieldModel->data['PetitBlogCustomField'];
+				if (!empty($Model->data['PetitBlogCustomFieldConfig'])) {
+					$data['PetitBlogCustomFieldConfig'] = $Model->data['PetitBlogCustomFieldConfig'];
 				}
 				$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $contentId;
 			}
@@ -280,6 +282,7 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 				// XXX もしキーワード設定の初期データ作成を行ってない事を考慮して判定している
 				if ($_data) {
 					// コピー元データがある時
+					$data = Hash::merge($data, $_data);
 					$data['PetitBlogCustomFieldConfig']['blog_content_id'] = $contentId;
 					unset($data['PetitBlogCustomFieldConfig']['id']);
 				} else {
