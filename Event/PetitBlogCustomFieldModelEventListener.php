@@ -204,6 +204,9 @@ class PetitBlogCustomFieldModelEventListener extends BcModelEventListener {
 				}
 			} else {
 				// 追加時
+				if (!empty($Model->data['PetitBlogCustomField'])) {
+					$data['PetitBlogCustomField'] = $Model->data['PetitBlogCustomField'];
+				}
 				$data['PetitBlogCustomField']['blog_post_id'] = $contentId;
 			}
 		} else {
